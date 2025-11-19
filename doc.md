@@ -480,9 +480,22 @@ configureRpcClient(axios.create({ baseURL: "/rpc", timeout: 10_000 }));
 
 ## Generate API code
 
+Default (PascalCase/camelCase):
+
 ```bash
-# From repository root
 node scripts/generate.mjs --input ./openrpc.json --out ./src/rpc/generated
+# => api.getUserById, GetUserByIdParams, GetUserByIdResult,
+#    getUserByIdQueryOptions, getUserByIdMutationOptions
+```
+
+Snake‑case mode (identifiers preserved in snake_case):
+
+```bash
+node scripts/generate.mjs --input ./openrpc_snake.json --out ./src/rpc/generated --use-snake-case
+# Example method "update_user" ->
+#   api.update_user
+#   update_user_params, update_user_result
+#   update_user_query_options, update_user_mutation_options
 ```
 
 Generated files:

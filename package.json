@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate": "node scripts/generate.mjs --input ./openrpc.json --out ./src/rpc/generated"
+    "generate": "node scripts/generate.mjs --input ./openrpc.json --out ./src/rpc/generated",
+    "generate-bavi": "node scripts/generate.mjs --input ./openrpc-bavi.json --out ./src/rpc/generated-bavi --use-snake-case"
   },
   "keywords": [],
   "author": "",

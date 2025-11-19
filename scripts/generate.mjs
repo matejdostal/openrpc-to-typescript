@@ -27,6 +27,8 @@ function parseArgs(argv) {
 const args = parseArgs(process.argv.slice(2));
 const inputPath = resolve(process.cwd(), args.input || args.i || "./openrpc.json");
 const outDir = resolve(process.cwd(), args.out || args.o || "./src/rpc/generated");
+const USE_SNAKE =
+  !!args["use-snake-case"] && String(args["use-snake-case"]).toLowerCase() !== "false";
 
 /* ---------- Helpers ---------- */
 const RESERVED = new Set([
@@ -76,6 +78,8 @@ const RESERVED = new Set([
 ]);
 const header = (n) => `/* AUTO-GENERATED: ${n} — do not edit by hand. */\n`;
 const isIdent = (n) => /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(n);
+
+/* case helpers */
 const pascal = (s) =>
   String(s)
     .replace(/[_\-\s]+/g, " ")
@@ -86,14 +90,37 @@ const camel = (s) => {
   const p = pascal(s);
   return p ? p[0].toLowerCase() + p.slice(1) : p;
 };
-const safeFnIdent = (n) => {
+
+/* snake id helpers: keep underscores, make TS-safe */
+function snakeIdent(s) {
+  let out = String(s).replace(/[^A-Za-z0-9_]/g, "_");
+  if (!/^[A-Za-z_]/.test(out)) out = `_${out}`;
+  if (RESERVED.has(out)) out = `${out}_`;
+  return out;
+}
+
+/* function identifiers */
+function safeFnIdent(n) {
+  // camelCase path (legacy)
   const c = isIdent(n) ? n : camel(n);
   return RESERVED.has(c) ? `${c}_` : c;
-};
+}
+function safeSnakeFnIdent(n) {
+  // snake_case path
+  return snakeIdent(n);
+}
+
+/* property keys for object fields */
 const escProp = (n) => (isIdent(n) ? n : JSON.stringify(n));
+
+/* schema refs and type name builders */
 const refName = (ref) => String(ref ?? "").replace(/^#\/components\/schemas\//, "");
-const P = (m) => `${pascal(m)}Params`;
-const R = (m) => `${pascal(m)}Result`;
+const P = (m) => (USE_SNAKE ? `${snakeIdent(m)}_params` : `${pascal(m)}Params`);
+const R = (m) => (USE_SNAKE ? `${snakeIdent(m)}_result` : `${pascal(m)}Result`);
+const FN = (m) => (USE_SNAKE ? safeSnakeFnIdent(m) : safeFnIdent(m));
+const QFN = (m) => (USE_SNAKE ? `${snakeIdent(m)}_query_options` : `${safeFnIdent(m)}QueryOptions`);
+const MFN = (m) =>
+  USE_SNAKE ? `${snakeIdent(m)}_mutation_options` : `${safeFnIdent(m)}MutationOptions`;
 
 function schemaToTs(s, schemas) {
   if (!s) return "unknown";
@@ -149,7 +176,7 @@ async function main() {
 function emitTypesTs(schemas, methods) {
   const out = [header("types.ts")];
 
-  // 1) Component schemas (e.g., User, GetUsersResult, ...)
+  // 1) Component schemas (preserve names exactly as in OpenRPC)
   for (const [name, sch] of Object.entries(schemas)) {
     const ts = schemaToTs(sch, schemas);
     if (sch?.type === "object" && ts.startsWith("{")) out.push(`export interface ${name} ${ts}\n`);
@@ -168,7 +195,7 @@ function emitTypesTs(schemas, methods) {
     out.push(`export interface ${pName} ${fields ? `{\n${fields}\n}` : "{}"}\n`);
   }
 
-  // 3) Results: emit only if schema name ≠ method-named Result or schema is inline.
+  // 3) Result: emit alias only if $ref name differs; inline otherwise
   for (const m of methods) {
     const rName = R(m.name);
     const rs = m?.result?.schema;
@@ -198,7 +225,7 @@ function emitApiTs(methods) {
     `export const api = {`,
     ...methods.map(
       (m) =>
-        `  ${safeFnIdent(m.name)}: (params: ${P(m.name)}, axios?: AxiosRequestConfig) =>` +
+        `  ${FN(m.name)}: (params: ${P(m.name)}, axios?: AxiosRequestConfig) =>` +
         ` getRpcClient().call<${P(m.name)}, ${R(m.name)}>(${JSON.stringify(
           m.name
         )}, params, axios),`
@@ -222,12 +249,14 @@ function emitOptionsTs(methods) {
   );
 
   for (const m of methods) {
-    const ident = safeFnIdent(m.name);
+    const ident = FN(m.name);
+    const qName = QFN(m.name);
+    const mName = MFN(m.name);
     const p = P(m.name);
     const r = R(m.name);
 
     lines.push(
-      `export function ${ident}QueryOptions(
+      `export function ${qName}(
   opts: QueryOptionsFactory<${p}, ${r}>
 ) {
   return {
@@ -240,7 +269,7 @@ function emitOptionsTs(methods) {
     );
 
     lines.push(
-      `export function ${ident}MutationOptions(
+      `export function ${mName}(
   opts: MutationOptionsFactory<${p}, ${r}>
 ) {
   return {
