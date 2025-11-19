@@ -1,0 +1,24 @@
+# Node / package outputs
+node_modules
+dist
+build
+coverage
+
+# Lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Environment files
+.env
+.env.*
+
+# Logs
+*.log
+
+# Version control
+.git
+
+# Prettier config files themselves
+.prettierrc
+.prettierignore

@@ -1,0 +1,70 @@
+# Top-most EditorConfig file
+root = true
+
+# Default settings for all files
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+#######################################
+# Text-like files
+#######################################
+
+[*.md]
+# Trailing spaces can be meaningful in Markdown (line breaks)
+trim_trailing_whitespace = false
+
+[*.txt]
+indent_style = space
+indent_size = 2
+
+#######################################
+# Web: JS / TS / HTML / CSS / JSON / YAML
+#######################################
+
+[*.{js,jsx,ts,tsx}]
+indent_style = space
+indent_size = 2
+max_line_length = 100
+
+[*.{json,yml,yaml}]
+indent_style = space
+indent_size = 2
+max_line_length = 100
+
+[*.{html,htm,css,scss,less}]
+indent_style = space
+indent_size = 2
+max_line_length = 100
+
+#######################################
+# Python
+#######################################
+
+[*.py]
+indent_style = space
+indent_size = 4
+max_line_length = 88
+
+#######################################
+# Other common languages
+#######################################
+
+[*.{java,cs,php,rb,kt,swift,rs,go}]
+indent_style = space
+indent_size = 4
+max_line_length = 100
+
+#######################################
+# Special cases
+#######################################
+
+# Makefiles must use tabs
+[Makefile]
+indent_style = tab
+
+# Windows batch files
+[*.{bat,cmd}]
+end_of_line = crlf
