@@ -498,12 +498,29 @@ node scripts/generate.mjs --input ./openrpc_snake.json --out ./src/rpc/generated
 #   update_user_query_options, update_user_mutation_options
 ```
 
+Options generation (per project):
+
+- Default prefixes: `["get", "list"]` -> query‑only; `["create", "update", "delete"]` -> mutation‑only; others emit both.
+- Config file (auto‑discovered): `openrpc-generator.config.json`
+
+  ```json
+  {
+    "options": {
+      "queryOnlyPrefixes": ["get", "list"],
+      "mutationOnlyPrefixes": ["create", "update", "delete"]
+    }
+  }
+  ```
+
+- CLI override: `--query-only-prefixes get,list --mutation-only-prefixes create,update,delete`
+- Custom config path: `--config ./my-generator-config.json`
+
 Generated files:
 
 - `src/rpc/generated/types.ts` – component schemas + all `(Method)Params` + method‑named `Result` types (only when needed).
 - `src/rpc/generated/api.ts` – 1:1 wrappers: `(params, axios?)`.
-- `src/rpc/generated/options.ts` – **both** `methodQueryOptions` and `methodMutationOptions` per RPC method.
-  Now with static top‑level imports and `mutationKey: ["<methodName>"]`.
+- `src/rpc/generated/options.ts` – `methodQueryOptions` / `methodMutationOptions` per RPC method, filtered by the
+  prefix rules above. Always uses static imports and `mutationKey: ["<methodName>"]`.
 - `src/rpc/generated/index.ts` – barrel.
 
 Regeneration is safe; only `src/rpc/generated/*` is overwritten.

@@ -1,0 +1,6 @@
+{
+  "options": {
+    "queryOnlyPrefixes": ["get", "list"],
+    "mutationOnlyPrefixes": ["create", "update", "delete"]
+  }
+}

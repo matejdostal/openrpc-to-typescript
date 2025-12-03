@@ -27,8 +27,16 @@ function parseArgs(argv) {
 const args = parseArgs(process.argv.slice(2));
 const inputPath = resolve(process.cwd(), args.input || args.i || "./openrpc.json");
 const outDir = resolve(process.cwd(), args.out || args.o || "./src/rpc/generated");
+const configPath = resolve(
+  process.cwd(),
+  args.config || args.c || "./openrpc-generator.config.json"
+);
 const USE_SNAKE =
   !!args["use-snake-case"] && String(args["use-snake-case"]).toLowerCase() !== "false";
+const DEFAULT_OPTIONS_CONFIG = {
+  queryOnlyPrefixes: ["get", "list"],
+  mutationOnlyPrefixes: ["create", "update", "delete"],
+};
 
 /* ---------- Helpers ---------- */
 const RESERVED = new Set([
@@ -121,6 +129,68 @@ const FN = (m) => (USE_SNAKE ? safeSnakeFnIdent(m) : safeFnIdent(m));
 const QFN = (m) => (USE_SNAKE ? `${snakeIdent(m)}_query_options` : `${safeFnIdent(m)}QueryOptions`);
 const MFN = (m) =>
   USE_SNAKE ? `${snakeIdent(m)}_mutation_options` : `${safeFnIdent(m)}MutationOptions`;
+const normalizePrefixes = (vals) =>
+  (vals ?? [])
+    .map((v) => String(v).trim().toLowerCase())
+    .filter((v) => v.length > 0);
+
+function parsePrefixList(val) {
+  if (val === undefined || val === null) return null;
+  if (Array.isArray(val)) return normalizePrefixes(val);
+  const raw = String(val).trim();
+  if (!raw) return null;
+
+  // Attempt JSON parsing to allow CLI strings like '["get","list"]'
+  try {
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed)) return normalizePrefixes(parsed);
+  } catch {
+    /* ignore */
+  }
+
+  return normalizePrefixes(raw.split(","));
+}
+
+async function readConfigFile(p) {
+  try {
+    return JSON.parse(await readFile(p, "utf8"));
+  } catch (err) {
+    if (err?.code === "ENOENT") return null;
+    throw err;
+  }
+}
+
+async function loadOptionsConfig() {
+  const fileCfgRaw = await readConfigFile(configPath);
+  const fileCfg = fileCfgRaw?.options ?? fileCfgRaw ?? {};
+
+  return {
+    queryOnlyPrefixes:
+      parsePrefixList(args["query-only-prefixes"]) ??
+      parsePrefixList(fileCfg?.queryOnlyPrefixes) ??
+      DEFAULT_OPTIONS_CONFIG.queryOnlyPrefixes,
+    mutationOnlyPrefixes:
+      parsePrefixList(args["mutation-only-prefixes"]) ??
+      parsePrefixList(fileCfg?.mutationOnlyPrefixes) ??
+      DEFAULT_OPTIONS_CONFIG.mutationOnlyPrefixes,
+  };
+}
+
+function buildOptionsSelector(optionsCfg) {
+  const queryOnly = normalizePrefixes(optionsCfg?.queryOnlyPrefixes);
+  const mutationOnly = normalizePrefixes(optionsCfg?.mutationOnlyPrefixes);
+
+  return (methodName) => {
+    const lowerName = String(methodName).toLowerCase();
+    const isQueryOnly = queryOnly.some((p) => lowerName.startsWith(p));
+    const isMutationOnly = mutationOnly.some((p) => lowerName.startsWith(p));
+
+    return {
+      emitQuery: isQueryOnly || !isMutationOnly,
+      emitMutation: isMutationOnly || !isQueryOnly,
+    };
+  };
+}
 
 function schemaToTs(s, schemas) {
   if (!s) return "unknown";
@@ -164,11 +234,16 @@ async function main() {
   if (!Array.isArray(spec?.methods)) throw new Error("Invalid OpenRPC: missing .methods[]");
 
   const schemas = spec?.components?.schemas ?? {};
+  const optionsConfig = await loadOptionsConfig();
   await mkdir(outDir, { recursive: true });
 
   await writeFile(join(outDir, "types.ts"), emitTypesTs(schemas, spec.methods), "utf8");
   await writeFile(join(outDir, "api.ts"), emitApiTs(spec.methods), "utf8");
-  await writeFile(join(outDir, "options.ts"), emitOptionsTs(spec.methods), "utf8");
+  await writeFile(
+    join(outDir, "options.ts"),
+    emitOptionsTs(spec.methods, optionsConfig),
+    "utf8"
+  );
   await writeFile(join(outDir, "index.ts"), emitIndexTs(), "utf8");
 }
 
@@ -235,51 +310,71 @@ function emitApiTs(methods) {
   ].join("\n");
 }
 
-function emitOptionsTs(methods) {
+function emitOptionsTs(methods, optionsConfig) {
   const allTypes = Array.from(new Set(methods.flatMap((m) => [P(m.name), R(m.name)])));
+  const shouldEmit = buildOptionsSelector(optionsConfig);
+  const methodOptions = methods.map((m) => ({
+    ident: FN(m.name),
+    qName: QFN(m.name),
+    mName: MFN(m.name),
+    params: P(m.name),
+    result: R(m.name),
+    method: m,
+    ...shouldEmit(m.name),
+  }));
+  const hasQueries = methodOptions.some((m) => m.emitQuery);
+  const hasMutations = methodOptions.some((m) => m.emitMutation);
+  const reactQueryImports = [];
+  if (hasQueries) reactQueryImports.push("UseQueryOptions");
+  if (hasMutations) reactQueryImports.push("UseMutationOptions");
+  const baseFactoryImports = [];
+  if (hasQueries) baseFactoryImports.push("QueryOptionsFactory");
+  if (hasMutations) baseFactoryImports.push("MutationOptionsFactory");
+
   const lines = [];
 
   lines.push(header("options.ts"));
-  lines.push(
-    `import type { UseQueryOptions, UseMutationOptions } from "@tanstack/react-query";`,
-    `import { api } from "./api";`,
-    `import type { QueryOptionsFactory, MutationOptionsFactory } from "../base";`,
-    `import type { ${allTypes.join(", ")} } from "./types";`,
-    ``
-  );
-
-  for (const m of methods) {
-    const ident = FN(m.name);
-    const qName = QFN(m.name);
-    const mName = MFN(m.name);
-    const p = P(m.name);
-    const r = R(m.name);
-
+  if (reactQueryImports.length) {
     lines.push(
-      `export function ${qName}(
-  opts: QueryOptionsFactory<${p}, ${r}>
+      `import type { ${reactQueryImports.join(", ")} } from "@tanstack/react-query";`
+    );
+  }
+  lines.push(`import { api } from "./api";`);
+  if (baseFactoryImports.length) {
+    lines.push(`import type { ${baseFactoryImports.join(", ")} } from "../base";`);
+  }
+  lines.push(`import type { ${allTypes.join(", ")} } from "./types";`, ``);
+
+  for (const m of methodOptions) {
+    if (m.emitQuery) {
+      lines.push(
+        `export function ${m.qName}(
+  opts: QueryOptionsFactory<${m.params}, ${m.result}>
 ) {
   return {
-    queryKey: [${JSON.stringify(m.name)}, opts.params] as const,
-    queryFn: () => api.${ident}(opts.params, opts.axios),
+    queryKey: [${JSON.stringify(m.method.name)}, opts.params] as const,
+    queryFn: () => api.${m.ident}(opts.params, opts.axios),
     ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<${r}, unknown, ${r}, readonly unknown[]>;
+  } satisfies UseQueryOptions<${m.result}, unknown, ${m.result}, readonly unknown[]>;
 }
 `
-    );
+      );
+    }
 
-    lines.push(
-      `export function ${mName}(
-  opts: MutationOptionsFactory<${p}, ${r}>
+    if (m.emitMutation) {
+      lines.push(
+        `export function ${m.mName}(
+  opts: MutationOptionsFactory<${m.params}, ${m.result}>
 ) {
   return {
-    mutationKey: [${JSON.stringify(m.name)}] as const,
-    mutationFn: (params: ${p}) => api.${ident}(params, opts.axios),
+    mutationKey: [${JSON.stringify(m.method.name)}] as const,
+    mutationFn: (params: ${m.params}) => api.${m.ident}(params, opts.axios),
     ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<${r}, unknown, ${p}>;
+  } satisfies UseMutationOptions<${m.result}, unknown, ${m.params}>;
 }
 `
-    );
+      );
+    }
   }
 
   return lines.join("\n");
