@@ -245,16 +245,6 @@ export function compromise_auth_token_family_mutation_options(
   } satisfies UseMutationOptions<compromise_auth_token_family_result, unknown, compromise_auth_token_family_params>;
 }
 
-export function create_auth_token_query_options(
-  opts: QueryOptionsFactory<create_auth_token_params, create_auth_token_result>
-) {
-  return {
-    queryKey: ["create_auth_token", opts.params] as const,
-    queryFn: () => api.create_auth_token(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<create_auth_token_result, unknown, create_auth_token_result, readonly unknown[]>;
-}
-
 export function create_auth_token_mutation_options(
   opts: MutationOptionsFactory<create_auth_token_params, create_auth_token_result>
 ) {
@@ -263,16 +253,6 @@ export function create_auth_token_mutation_options(
     mutationFn: (params: create_auth_token_params) => api.create_auth_token(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<create_auth_token_result, unknown, create_auth_token_params>;
-}
-
-export function create_company_query_options(
-  opts: QueryOptionsFactory<create_company_params, create_company_result>
-) {
-  return {
-    queryKey: ["create_company", opts.params] as const,
-    queryFn: () => api.create_company(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<create_company_result, unknown, create_company_result, readonly unknown[]>;
 }
 
 export function create_company_mutation_options(
@@ -285,16 +265,6 @@ export function create_company_mutation_options(
   } satisfies UseMutationOptions<create_company_result, unknown, create_company_params>;
 }
 
-export function create_company_section_query_options(
-  opts: QueryOptionsFactory<create_company_section_params, create_company_section_result>
-) {
-  return {
-    queryKey: ["create_company_section", opts.params] as const,
-    queryFn: () => api.create_company_section(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<create_company_section_result, unknown, create_company_section_result, readonly unknown[]>;
-}
-
 export function create_company_section_mutation_options(
   opts: MutationOptionsFactory<create_company_section_params, create_company_section_result>
 ) {
@@ -303,16 +273,6 @@ export function create_company_section_mutation_options(
     mutationFn: (params: create_company_section_params) => api.create_company_section(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<create_company_section_result, unknown, create_company_section_params>;
-}
-
-export function create_crossroad_query_options(
-  opts: QueryOptionsFactory<create_crossroad_params, create_crossroad_result>
-) {
-  return {
-    queryKey: ["create_crossroad", opts.params] as const,
-    queryFn: () => api.create_crossroad(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<create_crossroad_result, unknown, create_crossroad_result, readonly unknown[]>;
 }
 
 export function create_crossroad_mutation_options(
@@ -325,16 +285,6 @@ export function create_crossroad_mutation_options(
   } satisfies UseMutationOptions<create_crossroad_result, unknown, create_crossroad_params>;
 }
 
-export function create_crossroad_branch_query_options(
-  opts: QueryOptionsFactory<create_crossroad_branch_params, create_crossroad_branch_result>
-) {
-  return {
-    queryKey: ["create_crossroad_branch", opts.params] as const,
-    queryFn: () => api.create_crossroad_branch(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<create_crossroad_branch_result, unknown, create_crossroad_branch_result, readonly unknown[]>;
-}
-
 export function create_crossroad_branch_mutation_options(
   opts: MutationOptionsFactory<create_crossroad_branch_params, create_crossroad_branch_result>
 ) {
@@ -343,16 +293,6 @@ export function create_crossroad_branch_mutation_options(
     mutationFn: (params: create_crossroad_branch_params) => api.create_crossroad_branch(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<create_crossroad_branch_result, unknown, create_crossroad_branch_params>;
-}
-
-export function create_crossroad_branch_checkin_point_query_options(
-  opts: QueryOptionsFactory<create_crossroad_branch_checkin_point_params, create_crossroad_branch_checkin_point_result>
-) {
-  return {
-    queryKey: ["create_crossroad_branch_checkin_point", opts.params] as const,
-    queryFn: () => api.create_crossroad_branch_checkin_point(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<create_crossroad_branch_checkin_point_result, unknown, create_crossroad_branch_checkin_point_result, readonly unknown[]>;
 }
 
 export function create_crossroad_branch_checkin_point_mutation_options(
@@ -365,16 +305,6 @@ export function create_crossroad_branch_checkin_point_mutation_options(
   } satisfies UseMutationOptions<create_crossroad_branch_checkin_point_result, unknown, create_crossroad_branch_checkin_point_params>;
 }
 
-export function create_crossroad_checkin_branch_query_options(
-  opts: QueryOptionsFactory<create_crossroad_checkin_branch_params, create_crossroad_checkin_branch_result>
-) {
-  return {
-    queryKey: ["create_crossroad_checkin_branch", opts.params] as const,
-    queryFn: () => api.create_crossroad_checkin_branch(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<create_crossroad_checkin_branch_result, unknown, create_crossroad_checkin_branch_result, readonly unknown[]>;
-}
-
 export function create_crossroad_checkin_branch_mutation_options(
   opts: MutationOptionsFactory<create_crossroad_checkin_branch_params, create_crossroad_checkin_branch_result>
 ) {
@@ -383,16 +313,6 @@ export function create_crossroad_checkin_branch_mutation_options(
     mutationFn: (params: create_crossroad_checkin_branch_params) => api.create_crossroad_checkin_branch(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<create_crossroad_checkin_branch_result, unknown, create_crossroad_checkin_branch_params>;
-}
-
-export function create_crossroad_checkout_branch_query_options(
-  opts: QueryOptionsFactory<create_crossroad_checkout_branch_params, create_crossroad_checkout_branch_result>
-) {
-  return {
-    queryKey: ["create_crossroad_checkout_branch", opts.params] as const,
-    queryFn: () => api.create_crossroad_checkout_branch(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<create_crossroad_checkout_branch_result, unknown, create_crossroad_checkout_branch_result, readonly unknown[]>;
 }
 
 export function create_crossroad_checkout_branch_mutation_options(
@@ -405,16 +325,6 @@ export function create_crossroad_checkout_branch_mutation_options(
   } satisfies UseMutationOptions<create_crossroad_checkout_branch_result, unknown, create_crossroad_checkout_branch_params>;
 }
 
-export function create_crossroad_checkout_point_query_options(
-  opts: QueryOptionsFactory<create_crossroad_checkout_point_params, create_crossroad_checkout_point_result>
-) {
-  return {
-    queryKey: ["create_crossroad_checkout_point", opts.params] as const,
-    queryFn: () => api.create_crossroad_checkout_point(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<create_crossroad_checkout_point_result, unknown, create_crossroad_checkout_point_result, readonly unknown[]>;
-}
-
 export function create_crossroad_checkout_point_mutation_options(
   opts: MutationOptionsFactory<create_crossroad_checkout_point_params, create_crossroad_checkout_point_result>
 ) {
@@ -423,16 +333,6 @@ export function create_crossroad_checkout_point_mutation_options(
     mutationFn: (params: create_crossroad_checkout_point_params) => api.create_crossroad_checkout_point(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<create_crossroad_checkout_point_result, unknown, create_crossroad_checkout_point_params>;
-}
-
-export function create_crossroad_direction_query_options(
-  opts: QueryOptionsFactory<create_crossroad_direction_params, create_crossroad_direction_result>
-) {
-  return {
-    queryKey: ["create_crossroad_direction", opts.params] as const,
-    queryFn: () => api.create_crossroad_direction(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<create_crossroad_direction_result, unknown, create_crossroad_direction_result, readonly unknown[]>;
 }
 
 export function create_crossroad_direction_mutation_options(
@@ -445,16 +345,6 @@ export function create_crossroad_direction_mutation_options(
   } satisfies UseMutationOptions<create_crossroad_direction_result, unknown, create_crossroad_direction_params>;
 }
 
-export function create_crossroad_version_query_options(
-  opts: QueryOptionsFactory<create_crossroad_version_params, create_crossroad_version_result>
-) {
-  return {
-    queryKey: ["create_crossroad_version", opts.params] as const,
-    queryFn: () => api.create_crossroad_version(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<create_crossroad_version_result, unknown, create_crossroad_version_result, readonly unknown[]>;
-}
-
 export function create_crossroad_version_mutation_options(
   opts: MutationOptionsFactory<create_crossroad_version_params, create_crossroad_version_result>
 ) {
@@ -463,16 +353,6 @@ export function create_crossroad_version_mutation_options(
     mutationFn: (params: create_crossroad_version_params) => api.create_crossroad_version(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<create_crossroad_version_result, unknown, create_crossroad_version_params>;
-}
-
-export function create_email_record_query_options(
-  opts: QueryOptionsFactory<create_email_record_params, create_email_record_result>
-) {
-  return {
-    queryKey: ["create_email_record", opts.params] as const,
-    queryFn: () => api.create_email_record(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<create_email_record_result, unknown, create_email_record_result, readonly unknown[]>;
 }
 
 export function create_email_record_mutation_options(
@@ -485,16 +365,6 @@ export function create_email_record_mutation_options(
   } satisfies UseMutationOptions<create_email_record_result, unknown, create_email_record_params>;
 }
 
-export function create_report_request_query_options(
-  opts: QueryOptionsFactory<create_report_request_params, create_report_request_result>
-) {
-  return {
-    queryKey: ["create_report_request", opts.params] as const,
-    queryFn: () => api.create_report_request(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<create_report_request_result, unknown, create_report_request_result, readonly unknown[]>;
-}
-
 export function create_report_request_mutation_options(
   opts: MutationOptionsFactory<create_report_request_params, create_report_request_result>
 ) {
@@ -503,16 +373,6 @@ export function create_report_request_mutation_options(
     mutationFn: (params: create_report_request_params) => api.create_report_request(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<create_report_request_result, unknown, create_report_request_params>;
-}
-
-export function create_user_query_options(
-  opts: QueryOptionsFactory<create_user_params, create_user_result>
-) {
-  return {
-    queryKey: ["create_user", opts.params] as const,
-    queryFn: () => api.create_user(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<create_user_result, unknown, create_user_result, readonly unknown[]>;
 }
 
 export function create_user_mutation_options(
@@ -525,16 +385,6 @@ export function create_user_mutation_options(
   } satisfies UseMutationOptions<create_user_result, unknown, create_user_params>;
 }
 
-export function create_vehicles_update_request_email_record_query_options(
-  opts: QueryOptionsFactory<create_vehicles_update_request_email_record_params, create_vehicles_update_request_email_record_result>
-) {
-  return {
-    queryKey: ["create_vehicles_update_request_email_record", opts.params] as const,
-    queryFn: () => api.create_vehicles_update_request_email_record(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<create_vehicles_update_request_email_record_result, unknown, create_vehicles_update_request_email_record_result, readonly unknown[]>;
-}
-
 export function create_vehicles_update_request_email_record_mutation_options(
   opts: MutationOptionsFactory<create_vehicles_update_request_email_record_params, create_vehicles_update_request_email_record_result>
 ) {
@@ -543,16 +393,6 @@ export function create_vehicles_update_request_email_record_mutation_options(
     mutationFn: (params: create_vehicles_update_request_email_record_params) => api.create_vehicles_update_request_email_record(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<create_vehicles_update_request_email_record_result, unknown, create_vehicles_update_request_email_record_params>;
-}
-
-export function delete_auth_token_query_options(
-  opts: QueryOptionsFactory<delete_auth_token_params, delete_auth_token_result>
-) {
-  return {
-    queryKey: ["delete_auth_token", opts.params] as const,
-    queryFn: () => api.delete_auth_token(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<delete_auth_token_result, unknown, delete_auth_token_result, readonly unknown[]>;
 }
 
 export function delete_auth_token_mutation_options(
@@ -565,16 +405,6 @@ export function delete_auth_token_mutation_options(
   } satisfies UseMutationOptions<delete_auth_token_result, unknown, delete_auth_token_params>;
 }
 
-export function delete_auth_token_family_query_options(
-  opts: QueryOptionsFactory<delete_auth_token_family_params, delete_auth_token_family_result>
-) {
-  return {
-    queryKey: ["delete_auth_token_family", opts.params] as const,
-    queryFn: () => api.delete_auth_token_family(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<delete_auth_token_family_result, unknown, delete_auth_token_family_result, readonly unknown[]>;
-}
-
 export function delete_auth_token_family_mutation_options(
   opts: MutationOptionsFactory<delete_auth_token_family_params, delete_auth_token_family_result>
 ) {
@@ -583,16 +413,6 @@ export function delete_auth_token_family_mutation_options(
     mutationFn: (params: delete_auth_token_family_params) => api.delete_auth_token_family(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<delete_auth_token_family_result, unknown, delete_auth_token_family_params>;
-}
-
-export function delete_company_query_options(
-  opts: QueryOptionsFactory<delete_company_params, delete_company_result>
-) {
-  return {
-    queryKey: ["delete_company", opts.params] as const,
-    queryFn: () => api.delete_company(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<delete_company_result, unknown, delete_company_result, readonly unknown[]>;
 }
 
 export function delete_company_mutation_options(
@@ -605,16 +425,6 @@ export function delete_company_mutation_options(
   } satisfies UseMutationOptions<delete_company_result, unknown, delete_company_params>;
 }
 
-export function delete_company_section_query_options(
-  opts: QueryOptionsFactory<delete_company_section_params, delete_company_section_result>
-) {
-  return {
-    queryKey: ["delete_company_section", opts.params] as const,
-    queryFn: () => api.delete_company_section(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<delete_company_section_result, unknown, delete_company_section_result, readonly unknown[]>;
-}
-
 export function delete_company_section_mutation_options(
   opts: MutationOptionsFactory<delete_company_section_params, delete_company_section_result>
 ) {
@@ -623,16 +433,6 @@ export function delete_company_section_mutation_options(
     mutationFn: (params: delete_company_section_params) => api.delete_company_section(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<delete_company_section_result, unknown, delete_company_section_params>;
-}
-
-export function delete_crossroad_query_options(
-  opts: QueryOptionsFactory<delete_crossroad_params, delete_crossroad_result>
-) {
-  return {
-    queryKey: ["delete_crossroad", opts.params] as const,
-    queryFn: () => api.delete_crossroad(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<delete_crossroad_result, unknown, delete_crossroad_result, readonly unknown[]>;
 }
 
 export function delete_crossroad_mutation_options(
@@ -645,16 +445,6 @@ export function delete_crossroad_mutation_options(
   } satisfies UseMutationOptions<delete_crossroad_result, unknown, delete_crossroad_params>;
 }
 
-export function delete_crossroad_branch_query_options(
-  opts: QueryOptionsFactory<delete_crossroad_branch_params, delete_crossroad_branch_result>
-) {
-  return {
-    queryKey: ["delete_crossroad_branch", opts.params] as const,
-    queryFn: () => api.delete_crossroad_branch(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<delete_crossroad_branch_result, unknown, delete_crossroad_branch_result, readonly unknown[]>;
-}
-
 export function delete_crossroad_branch_mutation_options(
   opts: MutationOptionsFactory<delete_crossroad_branch_params, delete_crossroad_branch_result>
 ) {
@@ -663,16 +453,6 @@ export function delete_crossroad_branch_mutation_options(
     mutationFn: (params: delete_crossroad_branch_params) => api.delete_crossroad_branch(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<delete_crossroad_branch_result, unknown, delete_crossroad_branch_params>;
-}
-
-export function delete_crossroad_branch_checkin_point_query_options(
-  opts: QueryOptionsFactory<delete_crossroad_branch_checkin_point_params, delete_crossroad_branch_checkin_point_result>
-) {
-  return {
-    queryKey: ["delete_crossroad_branch_checkin_point", opts.params] as const,
-    queryFn: () => api.delete_crossroad_branch_checkin_point(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<delete_crossroad_branch_checkin_point_result, unknown, delete_crossroad_branch_checkin_point_result, readonly unknown[]>;
 }
 
 export function delete_crossroad_branch_checkin_point_mutation_options(
@@ -685,16 +465,6 @@ export function delete_crossroad_branch_checkin_point_mutation_options(
   } satisfies UseMutationOptions<delete_crossroad_branch_checkin_point_result, unknown, delete_crossroad_branch_checkin_point_params>;
 }
 
-export function delete_crossroad_checkout_point_query_options(
-  opts: QueryOptionsFactory<delete_crossroad_checkout_point_params, delete_crossroad_checkout_point_result>
-) {
-  return {
-    queryKey: ["delete_crossroad_checkout_point", opts.params] as const,
-    queryFn: () => api.delete_crossroad_checkout_point(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<delete_crossroad_checkout_point_result, unknown, delete_crossroad_checkout_point_result, readonly unknown[]>;
-}
-
 export function delete_crossroad_checkout_point_mutation_options(
   opts: MutationOptionsFactory<delete_crossroad_checkout_point_params, delete_crossroad_checkout_point_result>
 ) {
@@ -703,16 +473,6 @@ export function delete_crossroad_checkout_point_mutation_options(
     mutationFn: (params: delete_crossroad_checkout_point_params) => api.delete_crossroad_checkout_point(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<delete_crossroad_checkout_point_result, unknown, delete_crossroad_checkout_point_params>;
-}
-
-export function delete_crossroad_direction_query_options(
-  opts: QueryOptionsFactory<delete_crossroad_direction_params, delete_crossroad_direction_result>
-) {
-  return {
-    queryKey: ["delete_crossroad_direction", opts.params] as const,
-    queryFn: () => api.delete_crossroad_direction(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<delete_crossroad_direction_result, unknown, delete_crossroad_direction_result, readonly unknown[]>;
 }
 
 export function delete_crossroad_direction_mutation_options(
@@ -725,16 +485,6 @@ export function delete_crossroad_direction_mutation_options(
   } satisfies UseMutationOptions<delete_crossroad_direction_result, unknown, delete_crossroad_direction_params>;
 }
 
-export function delete_expired_auth_tokens_query_options(
-  opts: QueryOptionsFactory<delete_expired_auth_tokens_params, delete_expired_auth_tokens_result>
-) {
-  return {
-    queryKey: ["delete_expired_auth_tokens", opts.params] as const,
-    queryFn: () => api.delete_expired_auth_tokens(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<delete_expired_auth_tokens_result, unknown, delete_expired_auth_tokens_result, readonly unknown[]>;
-}
-
 export function delete_expired_auth_tokens_mutation_options(
   opts: MutationOptionsFactory<delete_expired_auth_tokens_params, delete_expired_auth_tokens_result>
 ) {
@@ -743,16 +493,6 @@ export function delete_expired_auth_tokens_mutation_options(
     mutationFn: (params: delete_expired_auth_tokens_params) => api.delete_expired_auth_tokens(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<delete_expired_auth_tokens_result, unknown, delete_expired_auth_tokens_params>;
-}
-
-export function delete_user_query_options(
-  opts: QueryOptionsFactory<delete_user_params, delete_user_result>
-) {
-  return {
-    queryKey: ["delete_user", opts.params] as const,
-    queryFn: () => api.delete_user(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<delete_user_result, unknown, delete_user_result, readonly unknown[]>;
 }
 
 export function delete_user_mutation_options(
@@ -775,16 +515,6 @@ export function get_active_vehicle_updates_ui_lock_request_query_options(
   } satisfies UseQueryOptions<get_active_vehicle_updates_ui_lock_request_result, unknown, get_active_vehicle_updates_ui_lock_request_result, readonly unknown[]>;
 }
 
-export function get_active_vehicle_updates_ui_lock_request_mutation_options(
-  opts: MutationOptionsFactory<get_active_vehicle_updates_ui_lock_request_params, get_active_vehicle_updates_ui_lock_request_result>
-) {
-  return {
-    mutationKey: ["get_active_vehicle_updates_ui_lock_request"] as const,
-    mutationFn: (params: get_active_vehicle_updates_ui_lock_request_params) => api.get_active_vehicle_updates_ui_lock_request(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_active_vehicle_updates_ui_lock_request_result, unknown, get_active_vehicle_updates_ui_lock_request_params>;
-}
-
 export function get_all_crossroad_directions_query_options(
   opts: QueryOptionsFactory<get_all_crossroad_directions_params, get_all_crossroad_directions_result>
 ) {
@@ -793,16 +523,6 @@ export function get_all_crossroad_directions_query_options(
     queryFn: () => api.get_all_crossroad_directions(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_all_crossroad_directions_result, unknown, get_all_crossroad_directions_result, readonly unknown[]>;
-}
-
-export function get_all_crossroad_directions_mutation_options(
-  opts: MutationOptionsFactory<get_all_crossroad_directions_params, get_all_crossroad_directions_result>
-) {
-  return {
-    mutationKey: ["get_all_crossroad_directions"] as const,
-    mutationFn: (params: get_all_crossroad_directions_params) => api.get_all_crossroad_directions(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_all_crossroad_directions_result, unknown, get_all_crossroad_directions_params>;
 }
 
 export function get_all_crossroad_directions_by_version_id_query_options(
@@ -815,16 +535,6 @@ export function get_all_crossroad_directions_by_version_id_query_options(
   } satisfies UseQueryOptions<get_all_crossroad_directions_by_version_id_result, unknown, get_all_crossroad_directions_by_version_id_result, readonly unknown[]>;
 }
 
-export function get_all_crossroad_directions_by_version_id_mutation_options(
-  opts: MutationOptionsFactory<get_all_crossroad_directions_by_version_id_params, get_all_crossroad_directions_by_version_id_result>
-) {
-  return {
-    mutationKey: ["get_all_crossroad_directions_by_version_id"] as const,
-    mutationFn: (params: get_all_crossroad_directions_by_version_id_params) => api.get_all_crossroad_directions_by_version_id(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_all_crossroad_directions_by_version_id_result, unknown, get_all_crossroad_directions_by_version_id_params>;
-}
-
 export function get_api_vehicle_data_query_options(
   opts: QueryOptionsFactory<get_api_vehicle_data_params, get_api_vehicle_data_result>
 ) {
@@ -833,16 +543,6 @@ export function get_api_vehicle_data_query_options(
     queryFn: () => api.get_api_vehicle_data(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_api_vehicle_data_result, unknown, get_api_vehicle_data_result, readonly unknown[]>;
-}
-
-export function get_api_vehicle_data_mutation_options(
-  opts: MutationOptionsFactory<get_api_vehicle_data_params, get_api_vehicle_data_result>
-) {
-  return {
-    mutationKey: ["get_api_vehicle_data"] as const,
-    mutationFn: (params: get_api_vehicle_data_params) => api.get_api_vehicle_data(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_api_vehicle_data_result, unknown, get_api_vehicle_data_params>;
 }
 
 export function get_api_vehicle_eco_drive_query_options(
@@ -855,16 +555,6 @@ export function get_api_vehicle_eco_drive_query_options(
   } satisfies UseQueryOptions<get_api_vehicle_eco_drive_result, unknown, get_api_vehicle_eco_drive_result, readonly unknown[]>;
 }
 
-export function get_api_vehicle_eco_drive_mutation_options(
-  opts: MutationOptionsFactory<get_api_vehicle_eco_drive_params, get_api_vehicle_eco_drive_result>
-) {
-  return {
-    mutationKey: ["get_api_vehicle_eco_drive"] as const,
-    mutationFn: (params: get_api_vehicle_eco_drive_params) => api.get_api_vehicle_eco_drive(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_api_vehicle_eco_drive_result, unknown, get_api_vehicle_eco_drive_params>;
-}
-
 export function get_auth_token_query_options(
   opts: QueryOptionsFactory<get_auth_token_params, get_auth_token_result>
 ) {
@@ -873,16 +563,6 @@ export function get_auth_token_query_options(
     queryFn: () => api.get_auth_token(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_auth_token_result, unknown, get_auth_token_result, readonly unknown[]>;
-}
-
-export function get_auth_token_mutation_options(
-  opts: MutationOptionsFactory<get_auth_token_params, get_auth_token_result>
-) {
-  return {
-    mutationKey: ["get_auth_token"] as const,
-    mutationFn: (params: get_auth_token_params) => api.get_auth_token(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_auth_token_result, unknown, get_auth_token_params>;
 }
 
 export function get_auth_user_by_id_query_options(
@@ -895,16 +575,6 @@ export function get_auth_user_by_id_query_options(
   } satisfies UseQueryOptions<get_auth_user_by_id_result, unknown, get_auth_user_by_id_result, readonly unknown[]>;
 }
 
-export function get_auth_user_by_id_mutation_options(
-  opts: MutationOptionsFactory<get_auth_user_by_id_params, get_auth_user_by_id_result>
-) {
-  return {
-    mutationKey: ["get_auth_user_by_id"] as const,
-    mutationFn: (params: get_auth_user_by_id_params) => api.get_auth_user_by_id(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_auth_user_by_id_result, unknown, get_auth_user_by_id_params>;
-}
-
 export function get_auth_user_by_login_name_and_password_query_options(
   opts: QueryOptionsFactory<get_auth_user_by_login_name_and_password_params, get_auth_user_by_login_name_and_password_result>
 ) {
@@ -913,16 +583,6 @@ export function get_auth_user_by_login_name_and_password_query_options(
     queryFn: () => api.get_auth_user_by_login_name_and_password(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_auth_user_by_login_name_and_password_result, unknown, get_auth_user_by_login_name_and_password_result, readonly unknown[]>;
-}
-
-export function get_auth_user_by_login_name_and_password_mutation_options(
-  opts: MutationOptionsFactory<get_auth_user_by_login_name_and_password_params, get_auth_user_by_login_name_and_password_result>
-) {
-  return {
-    mutationKey: ["get_auth_user_by_login_name_and_password"] as const,
-    mutationFn: (params: get_auth_user_by_login_name_and_password_params) => api.get_auth_user_by_login_name_and_password(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_auth_user_by_login_name_and_password_result, unknown, get_auth_user_by_login_name_and_password_params>;
 }
 
 export function get_companies_query_options(
@@ -935,16 +595,6 @@ export function get_companies_query_options(
   } satisfies UseQueryOptions<get_companies_result, unknown, get_companies_result, readonly unknown[]>;
 }
 
-export function get_companies_mutation_options(
-  opts: MutationOptionsFactory<get_companies_params, get_companies_result>
-) {
-  return {
-    mutationKey: ["get_companies"] as const,
-    mutationFn: (params: get_companies_params) => api.get_companies(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_companies_result, unknown, get_companies_params>;
-}
-
 export function get_company_by_id_query_options(
   opts: QueryOptionsFactory<get_company_by_id_params, get_company_by_id_result>
 ) {
@@ -953,16 +603,6 @@ export function get_company_by_id_query_options(
     queryFn: () => api.get_company_by_id(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_company_by_id_result, unknown, get_company_by_id_result, readonly unknown[]>;
-}
-
-export function get_company_by_id_mutation_options(
-  opts: MutationOptionsFactory<get_company_by_id_params, get_company_by_id_result>
-) {
-  return {
-    mutationKey: ["get_company_by_id"] as const,
-    mutationFn: (params: get_company_by_id_params) => api.get_company_by_id(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_company_by_id_result, unknown, get_company_by_id_params>;
 }
 
 export function get_company_sections_query_options(
@@ -975,16 +615,6 @@ export function get_company_sections_query_options(
   } satisfies UseQueryOptions<get_company_sections_result, unknown, get_company_sections_result, readonly unknown[]>;
 }
 
-export function get_company_sections_mutation_options(
-  opts: MutationOptionsFactory<get_company_sections_params, get_company_sections_result>
-) {
-  return {
-    mutationKey: ["get_company_sections"] as const,
-    mutationFn: (params: get_company_sections_params) => api.get_company_sections(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_company_sections_result, unknown, get_company_sections_params>;
-}
-
 export function get_crossroad_branch_by_id_query_options(
   opts: QueryOptionsFactory<get_crossroad_branch_by_id_params, get_crossroad_branch_by_id_result>
 ) {
@@ -993,16 +623,6 @@ export function get_crossroad_branch_by_id_query_options(
     queryFn: () => api.get_crossroad_branch_by_id(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_crossroad_branch_by_id_result, unknown, get_crossroad_branch_by_id_result, readonly unknown[]>;
-}
-
-export function get_crossroad_branch_by_id_mutation_options(
-  opts: MutationOptionsFactory<get_crossroad_branch_by_id_params, get_crossroad_branch_by_id_result>
-) {
-  return {
-    mutationKey: ["get_crossroad_branch_by_id"] as const,
-    mutationFn: (params: get_crossroad_branch_by_id_params) => api.get_crossroad_branch_by_id(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_crossroad_branch_by_id_result, unknown, get_crossroad_branch_by_id_params>;
 }
 
 export function get_crossroad_branch_checkin_point_by_id_query_options(
@@ -1015,16 +635,6 @@ export function get_crossroad_branch_checkin_point_by_id_query_options(
   } satisfies UseQueryOptions<get_crossroad_branch_checkin_point_by_id_result, unknown, get_crossroad_branch_checkin_point_by_id_result, readonly unknown[]>;
 }
 
-export function get_crossroad_branch_checkin_point_by_id_mutation_options(
-  opts: MutationOptionsFactory<get_crossroad_branch_checkin_point_by_id_params, get_crossroad_branch_checkin_point_by_id_result>
-) {
-  return {
-    mutationKey: ["get_crossroad_branch_checkin_point_by_id"] as const,
-    mutationFn: (params: get_crossroad_branch_checkin_point_by_id_params) => api.get_crossroad_branch_checkin_point_by_id(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_crossroad_branch_checkin_point_by_id_result, unknown, get_crossroad_branch_checkin_point_by_id_params>;
-}
-
 export function get_crossroad_branch_checkin_points_query_options(
   opts: QueryOptionsFactory<get_crossroad_branch_checkin_points_params, get_crossroad_branch_checkin_points_result>
 ) {
@@ -1033,16 +643,6 @@ export function get_crossroad_branch_checkin_points_query_options(
     queryFn: () => api.get_crossroad_branch_checkin_points(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_crossroad_branch_checkin_points_result, unknown, get_crossroad_branch_checkin_points_result, readonly unknown[]>;
-}
-
-export function get_crossroad_branch_checkin_points_mutation_options(
-  opts: MutationOptionsFactory<get_crossroad_branch_checkin_points_params, get_crossroad_branch_checkin_points_result>
-) {
-  return {
-    mutationKey: ["get_crossroad_branch_checkin_points"] as const,
-    mutationFn: (params: get_crossroad_branch_checkin_points_params) => api.get_crossroad_branch_checkin_points(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_crossroad_branch_checkin_points_result, unknown, get_crossroad_branch_checkin_points_params>;
 }
 
 export function get_crossroad_branches_query_options(
@@ -1055,16 +655,6 @@ export function get_crossroad_branches_query_options(
   } satisfies UseQueryOptions<get_crossroad_branches_result, unknown, get_crossroad_branches_result, readonly unknown[]>;
 }
 
-export function get_crossroad_branches_mutation_options(
-  opts: MutationOptionsFactory<get_crossroad_branches_params, get_crossroad_branches_result>
-) {
-  return {
-    mutationKey: ["get_crossroad_branches"] as const,
-    mutationFn: (params: get_crossroad_branches_params) => api.get_crossroad_branches(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_crossroad_branches_result, unknown, get_crossroad_branches_params>;
-}
-
 export function get_crossroad_branches_all_query_options(
   opts: QueryOptionsFactory<get_crossroad_branches_all_params, get_crossroad_branches_all_result>
 ) {
@@ -1073,16 +663,6 @@ export function get_crossroad_branches_all_query_options(
     queryFn: () => api.get_crossroad_branches_all(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_crossroad_branches_all_result, unknown, get_crossroad_branches_all_result, readonly unknown[]>;
-}
-
-export function get_crossroad_branches_all_mutation_options(
-  opts: MutationOptionsFactory<get_crossroad_branches_all_params, get_crossroad_branches_all_result>
-) {
-  return {
-    mutationKey: ["get_crossroad_branches_all"] as const,
-    mutationFn: (params: get_crossroad_branches_all_params) => api.get_crossroad_branches_all(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_crossroad_branches_all_result, unknown, get_crossroad_branches_all_params>;
 }
 
 export function get_crossroad_by_id_query_options(
@@ -1095,16 +675,6 @@ export function get_crossroad_by_id_query_options(
   } satisfies UseQueryOptions<get_crossroad_by_id_result, unknown, get_crossroad_by_id_result, readonly unknown[]>;
 }
 
-export function get_crossroad_by_id_mutation_options(
-  opts: MutationOptionsFactory<get_crossroad_by_id_params, get_crossroad_by_id_result>
-) {
-  return {
-    mutationKey: ["get_crossroad_by_id"] as const,
-    mutationFn: (params: get_crossroad_by_id_params) => api.get_crossroad_by_id(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_crossroad_by_id_result, unknown, get_crossroad_by_id_params>;
-}
-
 export function get_crossroad_checkout_point_by_id_query_options(
   opts: QueryOptionsFactory<get_crossroad_checkout_point_by_id_params, get_crossroad_checkout_point_by_id_result>
 ) {
@@ -1113,16 +683,6 @@ export function get_crossroad_checkout_point_by_id_query_options(
     queryFn: () => api.get_crossroad_checkout_point_by_id(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_crossroad_checkout_point_by_id_result, unknown, get_crossroad_checkout_point_by_id_result, readonly unknown[]>;
-}
-
-export function get_crossroad_checkout_point_by_id_mutation_options(
-  opts: MutationOptionsFactory<get_crossroad_checkout_point_by_id_params, get_crossroad_checkout_point_by_id_result>
-) {
-  return {
-    mutationKey: ["get_crossroad_checkout_point_by_id"] as const,
-    mutationFn: (params: get_crossroad_checkout_point_by_id_params) => api.get_crossroad_checkout_point_by_id(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_crossroad_checkout_point_by_id_result, unknown, get_crossroad_checkout_point_by_id_params>;
 }
 
 export function get_crossroad_checkout_points_query_options(
@@ -1135,16 +695,6 @@ export function get_crossroad_checkout_points_query_options(
   } satisfies UseQueryOptions<get_crossroad_checkout_points_result, unknown, get_crossroad_checkout_points_result, readonly unknown[]>;
 }
 
-export function get_crossroad_checkout_points_mutation_options(
-  opts: MutationOptionsFactory<get_crossroad_checkout_points_params, get_crossroad_checkout_points_result>
-) {
-  return {
-    mutationKey: ["get_crossroad_checkout_points"] as const,
-    mutationFn: (params: get_crossroad_checkout_points_params) => api.get_crossroad_checkout_points(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_crossroad_checkout_points_result, unknown, get_crossroad_checkout_points_params>;
-}
-
 export function get_crossroad_checkpoint_definitions_query_options(
   opts: QueryOptionsFactory<get_crossroad_checkpoint_definitions_params, get_crossroad_checkpoint_definitions_result>
 ) {
@@ -1153,16 +703,6 @@ export function get_crossroad_checkpoint_definitions_query_options(
     queryFn: () => api.get_crossroad_checkpoint_definitions(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_crossroad_checkpoint_definitions_result, unknown, get_crossroad_checkpoint_definitions_result, readonly unknown[]>;
-}
-
-export function get_crossroad_checkpoint_definitions_mutation_options(
-  opts: MutationOptionsFactory<get_crossroad_checkpoint_definitions_params, get_crossroad_checkpoint_definitions_result>
-) {
-  return {
-    mutationKey: ["get_crossroad_checkpoint_definitions"] as const,
-    mutationFn: (params: get_crossroad_checkpoint_definitions_params) => api.get_crossroad_checkpoint_definitions(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_crossroad_checkpoint_definitions_result, unknown, get_crossroad_checkpoint_definitions_params>;
 }
 
 export function get_crossroad_direction_by_id_query_options(
@@ -1175,16 +715,6 @@ export function get_crossroad_direction_by_id_query_options(
   } satisfies UseQueryOptions<get_crossroad_direction_by_id_result, unknown, get_crossroad_direction_by_id_result, readonly unknown[]>;
 }
 
-export function get_crossroad_direction_by_id_mutation_options(
-  opts: MutationOptionsFactory<get_crossroad_direction_by_id_params, get_crossroad_direction_by_id_result>
-) {
-  return {
-    mutationKey: ["get_crossroad_direction_by_id"] as const,
-    mutationFn: (params: get_crossroad_direction_by_id_params) => api.get_crossroad_direction_by_id(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_crossroad_direction_by_id_result, unknown, get_crossroad_direction_by_id_params>;
-}
-
 export function get_crossroad_directions_query_options(
   opts: QueryOptionsFactory<get_crossroad_directions_params, get_crossroad_directions_result>
 ) {
@@ -1193,16 +723,6 @@ export function get_crossroad_directions_query_options(
     queryFn: () => api.get_crossroad_directions(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_crossroad_directions_result, unknown, get_crossroad_directions_result, readonly unknown[]>;
-}
-
-export function get_crossroad_directions_mutation_options(
-  opts: MutationOptionsFactory<get_crossroad_directions_params, get_crossroad_directions_result>
-) {
-  return {
-    mutationKey: ["get_crossroad_directions"] as const,
-    mutationFn: (params: get_crossroad_directions_params) => api.get_crossroad_directions(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_crossroad_directions_result, unknown, get_crossroad_directions_params>;
 }
 
 export function get_crossroad_driver_types_query_options(
@@ -1215,16 +735,6 @@ export function get_crossroad_driver_types_query_options(
   } satisfies UseQueryOptions<get_crossroad_driver_types_result, unknown, get_crossroad_driver_types_result, readonly unknown[]>;
 }
 
-export function get_crossroad_driver_types_mutation_options(
-  opts: MutationOptionsFactory<get_crossroad_driver_types_params, get_crossroad_driver_types_result>
-) {
-  return {
-    mutationKey: ["get_crossroad_driver_types"] as const,
-    mutationFn: (params: get_crossroad_driver_types_params) => api.get_crossroad_driver_types(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_crossroad_driver_types_result, unknown, get_crossroad_driver_types_params>;
-}
-
 export function get_crossroad_history_events_query_options(
   opts: QueryOptionsFactory<get_crossroad_history_events_params, get_crossroad_history_events_result>
 ) {
@@ -1233,16 +743,6 @@ export function get_crossroad_history_events_query_options(
     queryFn: () => api.get_crossroad_history_events(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_crossroad_history_events_result, unknown, get_crossroad_history_events_result, readonly unknown[]>;
-}
-
-export function get_crossroad_history_events_mutation_options(
-  opts: MutationOptionsFactory<get_crossroad_history_events_params, get_crossroad_history_events_result>
-) {
-  return {
-    mutationKey: ["get_crossroad_history_events"] as const,
-    mutationFn: (params: get_crossroad_history_events_params) => api.get_crossroad_history_events(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_crossroad_history_events_result, unknown, get_crossroad_history_events_params>;
 }
 
 export function get_crossroad_versions_query_options(
@@ -1255,16 +755,6 @@ export function get_crossroad_versions_query_options(
   } satisfies UseQueryOptions<get_crossroad_versions_result, unknown, get_crossroad_versions_result, readonly unknown[]>;
 }
 
-export function get_crossroad_versions_mutation_options(
-  opts: MutationOptionsFactory<get_crossroad_versions_params, get_crossroad_versions_result>
-) {
-  return {
-    mutationKey: ["get_crossroad_versions"] as const,
-    mutationFn: (params: get_crossroad_versions_params) => api.get_crossroad_versions(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_crossroad_versions_result, unknown, get_crossroad_versions_params>;
-}
-
 export function get_crossroads_query_options(
   opts: QueryOptionsFactory<get_crossroads_params, get_crossroads_result>
 ) {
@@ -1273,16 +763,6 @@ export function get_crossroads_query_options(
     queryFn: () => api.get_crossroads(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_crossroads_result, unknown, get_crossroads_result, readonly unknown[]>;
-}
-
-export function get_crossroads_mutation_options(
-  opts: MutationOptionsFactory<get_crossroads_params, get_crossroads_result>
-) {
-  return {
-    mutationKey: ["get_crossroads"] as const,
-    mutationFn: (params: get_crossroads_params) => api.get_crossroads(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_crossroads_result, unknown, get_crossroads_params>;
 }
 
 export function get_crossroads_by_version_id_query_options(
@@ -1295,16 +775,6 @@ export function get_crossroads_by_version_id_query_options(
   } satisfies UseQueryOptions<get_crossroads_by_version_id_result, unknown, get_crossroads_by_version_id_result, readonly unknown[]>;
 }
 
-export function get_crossroads_by_version_id_mutation_options(
-  opts: MutationOptionsFactory<get_crossroads_by_version_id_params, get_crossroads_by_version_id_result>
-) {
-  return {
-    mutationKey: ["get_crossroads_by_version_id"] as const,
-    mutationFn: (params: get_crossroads_by_version_id_params) => api.get_crossroads_by_version_id(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_crossroads_by_version_id_result, unknown, get_crossroads_by_version_id_params>;
-}
-
 export function get_diagnostic_data_actual_state_query_options(
   opts: QueryOptionsFactory<get_diagnostic_data_actual_state_params, get_diagnostic_data_actual_state_result>
 ) {
@@ -1313,16 +783,6 @@ export function get_diagnostic_data_actual_state_query_options(
     queryFn: () => api.get_diagnostic_data_actual_state(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_diagnostic_data_actual_state_result, unknown, get_diagnostic_data_actual_state_result, readonly unknown[]>;
-}
-
-export function get_diagnostic_data_actual_state_mutation_options(
-  opts: MutationOptionsFactory<get_diagnostic_data_actual_state_params, get_diagnostic_data_actual_state_result>
-) {
-  return {
-    mutationKey: ["get_diagnostic_data_actual_state"] as const,
-    mutationFn: (params: get_diagnostic_data_actual_state_params) => api.get_diagnostic_data_actual_state(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_diagnostic_data_actual_state_result, unknown, get_diagnostic_data_actual_state_params>;
 }
 
 export function get_history_query_options(
@@ -1335,16 +795,6 @@ export function get_history_query_options(
   } satisfies UseQueryOptions<get_history_result, unknown, get_history_result, readonly unknown[]>;
 }
 
-export function get_history_mutation_options(
-  opts: MutationOptionsFactory<get_history_params, get_history_result>
-) {
-  return {
-    mutationKey: ["get_history"] as const,
-    mutationFn: (params: get_history_params) => api.get_history(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_history_result, unknown, get_history_params>;
-}
-
 export function get_history_process_data_query_options(
   opts: QueryOptionsFactory<get_history_process_data_params, get_history_process_data_result>
 ) {
@@ -1353,16 +803,6 @@ export function get_history_process_data_query_options(
     queryFn: () => api.get_history_process_data(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_history_process_data_result, unknown, get_history_process_data_result, readonly unknown[]>;
-}
-
-export function get_history_process_data_mutation_options(
-  opts: MutationOptionsFactory<get_history_process_data_params, get_history_process_data_result>
-) {
-  return {
-    mutationKey: ["get_history_process_data"] as const,
-    mutationFn: (params: get_history_process_data_params) => api.get_history_process_data(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_history_process_data_result, unknown, get_history_process_data_params>;
 }
 
 export function get_history_process_data__query_options(
@@ -1375,16 +815,6 @@ export function get_history_process_data__query_options(
   } satisfies UseQueryOptions<get_history_process_data__result, unknown, get_history_process_data__result, readonly unknown[]>;
 }
 
-export function get_history_process_data__mutation_options(
-  opts: MutationOptionsFactory<get_history_process_data__params, get_history_process_data__result>
-) {
-  return {
-    mutationKey: ["get_history_process_data_"] as const,
-    mutationFn: (params: get_history_process_data__params) => api.get_history_process_data_(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_history_process_data__result, unknown, get_history_process_data__params>;
-}
-
 export function get_history_process_data_dpb_query_options(
   opts: QueryOptionsFactory<get_history_process_data_dpb_params, get_history_process_data_dpb_result>
 ) {
@@ -1393,16 +823,6 @@ export function get_history_process_data_dpb_query_options(
     queryFn: () => api.get_history_process_data_dpb(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_history_process_data_dpb_result, unknown, get_history_process_data_dpb_result, readonly unknown[]>;
-}
-
-export function get_history_process_data_dpb_mutation_options(
-  opts: MutationOptionsFactory<get_history_process_data_dpb_params, get_history_process_data_dpb_result>
-) {
-  return {
-    mutationKey: ["get_history_process_data_dpb"] as const,
-    mutationFn: (params: get_history_process_data_dpb_params) => api.get_history_process_data_dpb(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_history_process_data_dpb_result, unknown, get_history_process_data_dpb_params>;
 }
 
 export function get_log_records_query_options(
@@ -1415,16 +835,6 @@ export function get_log_records_query_options(
   } satisfies UseQueryOptions<get_log_records_result, unknown, get_log_records_result, readonly unknown[]>;
 }
 
-export function get_log_records_mutation_options(
-  opts: MutationOptionsFactory<get_log_records_params, get_log_records_result>
-) {
-  return {
-    mutationKey: ["get_log_records"] as const,
-    mutationFn: (params: get_log_records_params) => api.get_log_records(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_log_records_result, unknown, get_log_records_params>;
-}
-
 export function get_peripherals_info_by_type_query_options(
   opts: QueryOptionsFactory<get_peripherals_info_by_type_params, get_peripherals_info_by_type_result>
 ) {
@@ -1433,16 +843,6 @@ export function get_peripherals_info_by_type_query_options(
     queryFn: () => api.get_peripherals_info_by_type(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_peripherals_info_by_type_result, unknown, get_peripherals_info_by_type_result, readonly unknown[]>;
-}
-
-export function get_peripherals_info_by_type_mutation_options(
-  opts: MutationOptionsFactory<get_peripherals_info_by_type_params, get_peripherals_info_by_type_result>
-) {
-  return {
-    mutationKey: ["get_peripherals_info_by_type"] as const,
-    mutationFn: (params: get_peripherals_info_by_type_params) => api.get_peripherals_info_by_type(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_peripherals_info_by_type_result, unknown, get_peripherals_info_by_type_params>;
 }
 
 export function get_peripherals_info_from_selected_vehicle_query_options(
@@ -1455,16 +855,6 @@ export function get_peripherals_info_from_selected_vehicle_query_options(
   } satisfies UseQueryOptions<get_peripherals_info_from_selected_vehicle_result, unknown, get_peripherals_info_from_selected_vehicle_result, readonly unknown[]>;
 }
 
-export function get_peripherals_info_from_selected_vehicle_mutation_options(
-  opts: MutationOptionsFactory<get_peripherals_info_from_selected_vehicle_params, get_peripherals_info_from_selected_vehicle_result>
-) {
-  return {
-    mutationKey: ["get_peripherals_info_from_selected_vehicle"] as const,
-    mutationFn: (params: get_peripherals_info_from_selected_vehicle_params) => api.get_peripherals_info_from_selected_vehicle(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_peripherals_info_from_selected_vehicle_result, unknown, get_peripherals_info_from_selected_vehicle_params>;
-}
-
 export function get_report_request_state_query_options(
   opts: QueryOptionsFactory<get_report_request_state_params, get_report_request_state_result>
 ) {
@@ -1473,16 +863,6 @@ export function get_report_request_state_query_options(
     queryFn: () => api.get_report_request_state(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_report_request_state_result, unknown, get_report_request_state_result, readonly unknown[]>;
-}
-
-export function get_report_request_state_mutation_options(
-  opts: MutationOptionsFactory<get_report_request_state_params, get_report_request_state_result>
-) {
-  return {
-    mutationKey: ["get_report_request_state"] as const,
-    mutationFn: (params: get_report_request_state_params) => api.get_report_request_state(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_report_request_state_result, unknown, get_report_request_state_params>;
 }
 
 export function get_schedule_service_query_options(
@@ -1495,16 +875,6 @@ export function get_schedule_service_query_options(
   } satisfies UseQueryOptions<get_schedule_service_result, unknown, get_schedule_service_result, readonly unknown[]>;
 }
 
-export function get_schedule_service_mutation_options(
-  opts: MutationOptionsFactory<get_schedule_service_params, get_schedule_service_result>
-) {
-  return {
-    mutationKey: ["get_schedule_service"] as const,
-    mutationFn: (params: get_schedule_service_params) => api.get_schedule_service(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_schedule_service_result, unknown, get_schedule_service_params>;
-}
-
 export function get_stations_realtime_data_query_options(
   opts: QueryOptionsFactory<get_stations_realtime_data_params, get_stations_realtime_data_result>
 ) {
@@ -1513,16 +883,6 @@ export function get_stations_realtime_data_query_options(
     queryFn: () => api.get_stations_realtime_data(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_stations_realtime_data_result, unknown, get_stations_realtime_data_result, readonly unknown[]>;
-}
-
-export function get_stations_realtime_data_mutation_options(
-  opts: MutationOptionsFactory<get_stations_realtime_data_params, get_stations_realtime_data_result>
-) {
-  return {
-    mutationKey: ["get_stations_realtime_data"] as const,
-    mutationFn: (params: get_stations_realtime_data_params) => api.get_stations_realtime_data(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_stations_realtime_data_result, unknown, get_stations_realtime_data_params>;
 }
 
 export function get_stations_realtime_data_v2_query_options(
@@ -1535,16 +895,6 @@ export function get_stations_realtime_data_v2_query_options(
   } satisfies UseQueryOptions<get_stations_realtime_data_v2_result, unknown, get_stations_realtime_data_v2_result, readonly unknown[]>;
 }
 
-export function get_stations_realtime_data_v2_mutation_options(
-  opts: MutationOptionsFactory<get_stations_realtime_data_v2_params, get_stations_realtime_data_v2_result>
-) {
-  return {
-    mutationKey: ["get_stations_realtime_data_v2"] as const,
-    mutationFn: (params: get_stations_realtime_data_v2_params) => api.get_stations_realtime_data_v2(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_stations_realtime_data_v2_result, unknown, get_stations_realtime_data_v2_params>;
-}
-
 export function get_stop_list_query_options(
   opts: QueryOptionsFactory<get_stop_list_params, get_stop_list_result>
 ) {
@@ -1553,16 +903,6 @@ export function get_stop_list_query_options(
     queryFn: () => api.get_stop_list(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_stop_list_result, unknown, get_stop_list_result, readonly unknown[]>;
-}
-
-export function get_stop_list_mutation_options(
-  opts: MutationOptionsFactory<get_stop_list_params, get_stop_list_result>
-) {
-  return {
-    mutationKey: ["get_stop_list"] as const,
-    mutationFn: (params: get_stop_list_params) => api.get_stop_list(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_stop_list_result, unknown, get_stop_list_params>;
 }
 
 export function get_stop_panel_companies_query_options(
@@ -1575,16 +915,6 @@ export function get_stop_panel_companies_query_options(
   } satisfies UseQueryOptions<get_stop_panel_companies_result, unknown, get_stop_panel_companies_result, readonly unknown[]>;
 }
 
-export function get_stop_panel_companies_mutation_options(
-  opts: MutationOptionsFactory<get_stop_panel_companies_params, get_stop_panel_companies_result>
-) {
-  return {
-    mutationKey: ["get_stop_panel_companies"] as const,
-    mutationFn: (params: get_stop_panel_companies_params) => api.get_stop_panel_companies(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_stop_panel_companies_result, unknown, get_stop_panel_companies_params>;
-}
-
 export function get_stop_panel_components_query_options(
   opts: QueryOptionsFactory<get_stop_panel_components_params, get_stop_panel_components_result>
 ) {
@@ -1593,16 +923,6 @@ export function get_stop_panel_components_query_options(
     queryFn: () => api.get_stop_panel_components(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_stop_panel_components_result, unknown, get_stop_panel_components_result, readonly unknown[]>;
-}
-
-export function get_stop_panel_components_mutation_options(
-  opts: MutationOptionsFactory<get_stop_panel_components_params, get_stop_panel_components_result>
-) {
-  return {
-    mutationKey: ["get_stop_panel_components"] as const,
-    mutationFn: (params: get_stop_panel_components_params) => api.get_stop_panel_components(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_stop_panel_components_result, unknown, get_stop_panel_components_params>;
 }
 
 export function get_stop_panel_data_query_options(
@@ -1615,16 +935,6 @@ export function get_stop_panel_data_query_options(
   } satisfies UseQueryOptions<get_stop_panel_data_result, unknown, get_stop_panel_data_result, readonly unknown[]>;
 }
 
-export function get_stop_panel_data_mutation_options(
-  opts: MutationOptionsFactory<get_stop_panel_data_params, get_stop_panel_data_result>
-) {
-  return {
-    mutationKey: ["get_stop_panel_data"] as const,
-    mutationFn: (params: get_stop_panel_data_params) => api.get_stop_panel_data(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_stop_panel_data_result, unknown, get_stop_panel_data_params>;
-}
-
 export function get_stop_panel_data_2_query_options(
   opts: QueryOptionsFactory<get_stop_panel_data_2_params, get_stop_panel_data_2_result>
 ) {
@@ -1633,16 +943,6 @@ export function get_stop_panel_data_2_query_options(
     queryFn: () => api.get_stop_panel_data_2(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_stop_panel_data_2_result, unknown, get_stop_panel_data_2_result, readonly unknown[]>;
-}
-
-export function get_stop_panel_data_2_mutation_options(
-  opts: MutationOptionsFactory<get_stop_panel_data_2_params, get_stop_panel_data_2_result>
-) {
-  return {
-    mutationKey: ["get_stop_panel_data_2"] as const,
-    mutationFn: (params: get_stop_panel_data_2_params) => api.get_stop_panel_data_2(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_stop_panel_data_2_result, unknown, get_stop_panel_data_2_params>;
 }
 
 export function get_stop_panel_data_2_backup_query_options(
@@ -1655,16 +955,6 @@ export function get_stop_panel_data_2_backup_query_options(
   } satisfies UseQueryOptions<get_stop_panel_data_2_backup_result, unknown, get_stop_panel_data_2_backup_result, readonly unknown[]>;
 }
 
-export function get_stop_panel_data_2_backup_mutation_options(
-  opts: MutationOptionsFactory<get_stop_panel_data_2_backup_params, get_stop_panel_data_2_backup_result>
-) {
-  return {
-    mutationKey: ["get_stop_panel_data_2_backup"] as const,
-    mutationFn: (params: get_stop_panel_data_2_backup_params) => api.get_stop_panel_data_2_backup(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_stop_panel_data_2_backup_result, unknown, get_stop_panel_data_2_backup_params>;
-}
-
 export function get_stop_panel_data_test_query_options(
   opts: QueryOptionsFactory<get_stop_panel_data_test_params, get_stop_panel_data_test_result>
 ) {
@@ -1673,16 +963,6 @@ export function get_stop_panel_data_test_query_options(
     queryFn: () => api.get_stop_panel_data_test(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_stop_panel_data_test_result, unknown, get_stop_panel_data_test_result, readonly unknown[]>;
-}
-
-export function get_stop_panel_data_test_mutation_options(
-  opts: MutationOptionsFactory<get_stop_panel_data_test_params, get_stop_panel_data_test_result>
-) {
-  return {
-    mutationKey: ["get_stop_panel_data_test"] as const,
-    mutationFn: (params: get_stop_panel_data_test_params) => api.get_stop_panel_data_test(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_stop_panel_data_test_result, unknown, get_stop_panel_data_test_params>;
 }
 
 export function get_stop_panel_data_tmp_query_options(
@@ -1695,16 +975,6 @@ export function get_stop_panel_data_tmp_query_options(
   } satisfies UseQueryOptions<get_stop_panel_data_tmp_result, unknown, get_stop_panel_data_tmp_result, readonly unknown[]>;
 }
 
-export function get_stop_panel_data_tmp_mutation_options(
-  opts: MutationOptionsFactory<get_stop_panel_data_tmp_params, get_stop_panel_data_tmp_result>
-) {
-  return {
-    mutationKey: ["get_stop_panel_data_tmp"] as const,
-    mutationFn: (params: get_stop_panel_data_tmp_params) => api.get_stop_panel_data_tmp(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_stop_panel_data_tmp_result, unknown, get_stop_panel_data_tmp_params>;
-}
-
 export function get_stop_panel_errors_query_options(
   opts: QueryOptionsFactory<get_stop_panel_errors_params, get_stop_panel_errors_result>
 ) {
@@ -1713,16 +983,6 @@ export function get_stop_panel_errors_query_options(
     queryFn: () => api.get_stop_panel_errors(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_stop_panel_errors_result, unknown, get_stop_panel_errors_result, readonly unknown[]>;
-}
-
-export function get_stop_panel_errors_mutation_options(
-  opts: MutationOptionsFactory<get_stop_panel_errors_params, get_stop_panel_errors_result>
-) {
-  return {
-    mutationKey: ["get_stop_panel_errors"] as const,
-    mutationFn: (params: get_stop_panel_errors_params) => api.get_stop_panel_errors(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_stop_panel_errors_result, unknown, get_stop_panel_errors_params>;
 }
 
 export function get_stop_panel_layouts_query_options(
@@ -1735,16 +995,6 @@ export function get_stop_panel_layouts_query_options(
   } satisfies UseQueryOptions<get_stop_panel_layouts_result, unknown, get_stop_panel_layouts_result, readonly unknown[]>;
 }
 
-export function get_stop_panel_layouts_mutation_options(
-  opts: MutationOptionsFactory<get_stop_panel_layouts_params, get_stop_panel_layouts_result>
-) {
-  return {
-    mutationKey: ["get_stop_panel_layouts"] as const,
-    mutationFn: (params: get_stop_panel_layouts_params) => api.get_stop_panel_layouts(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_stop_panel_layouts_result, unknown, get_stop_panel_layouts_params>;
-}
-
 export function get_stop_panel_models_query_options(
   opts: QueryOptionsFactory<get_stop_panel_models_params, get_stop_panel_models_result>
 ) {
@@ -1753,16 +1003,6 @@ export function get_stop_panel_models_query_options(
     queryFn: () => api.get_stop_panel_models(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_stop_panel_models_result, unknown, get_stop_panel_models_result, readonly unknown[]>;
-}
-
-export function get_stop_panel_models_mutation_options(
-  opts: MutationOptionsFactory<get_stop_panel_models_params, get_stop_panel_models_result>
-) {
-  return {
-    mutationKey: ["get_stop_panel_models"] as const,
-    mutationFn: (params: get_stop_panel_models_params) => api.get_stop_panel_models(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_stop_panel_models_result, unknown, get_stop_panel_models_params>;
 }
 
 export function get_stop_panel_schedule_query_options(
@@ -1775,16 +1015,6 @@ export function get_stop_panel_schedule_query_options(
   } satisfies UseQueryOptions<get_stop_panel_schedule_result, unknown, get_stop_panel_schedule_result, readonly unknown[]>;
 }
 
-export function get_stop_panel_schedule_mutation_options(
-  opts: MutationOptionsFactory<get_stop_panel_schedule_params, get_stop_panel_schedule_result>
-) {
-  return {
-    mutationKey: ["get_stop_panel_schedule"] as const,
-    mutationFn: (params: get_stop_panel_schedule_params) => api.get_stop_panel_schedule(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_stop_panel_schedule_result, unknown, get_stop_panel_schedule_params>;
-}
-
 export function get_stop_panels_query_options(
   opts: QueryOptionsFactory<get_stop_panels_params, get_stop_panels_result>
 ) {
@@ -1793,16 +1023,6 @@ export function get_stop_panels_query_options(
     queryFn: () => api.get_stop_panels(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_stop_panels_result, unknown, get_stop_panels_result, readonly unknown[]>;
-}
-
-export function get_stop_panels_mutation_options(
-  opts: MutationOptionsFactory<get_stop_panels_params, get_stop_panels_result>
-) {
-  return {
-    mutationKey: ["get_stop_panels"] as const,
-    mutationFn: (params: get_stop_panels_params) => api.get_stop_panels(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_stop_panels_result, unknown, get_stop_panels_params>;
 }
 
 export function get_stops_query_options(
@@ -1815,16 +1035,6 @@ export function get_stops_query_options(
   } satisfies UseQueryOptions<get_stops_result, unknown, get_stops_result, readonly unknown[]>;
 }
 
-export function get_stops_mutation_options(
-  opts: MutationOptionsFactory<get_stops_params, get_stops_result>
-) {
-  return {
-    mutationKey: ["get_stops"] as const,
-    mutationFn: (params: get_stops_params) => api.get_stops(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_stops_result, unknown, get_stops_params>;
-}
-
 export function get_update_target_def_query_options(
   opts: QueryOptionsFactory<get_update_target_def_params, get_update_target_def_result>
 ) {
@@ -1833,16 +1043,6 @@ export function get_update_target_def_query_options(
     queryFn: () => api.get_update_target_def(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_update_target_def_result, unknown, get_update_target_def_result, readonly unknown[]>;
-}
-
-export function get_update_target_def_mutation_options(
-  opts: MutationOptionsFactory<get_update_target_def_params, get_update_target_def_result>
-) {
-  return {
-    mutationKey: ["get_update_target_def"] as const,
-    mutationFn: (params: get_update_target_def_params) => api.get_update_target_def(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_update_target_def_result, unknown, get_update_target_def_params>;
 }
 
 export function get_update_versions_summaries_query_options(
@@ -1855,16 +1055,6 @@ export function get_update_versions_summaries_query_options(
   } satisfies UseQueryOptions<get_update_versions_summaries_result, unknown, get_update_versions_summaries_result, readonly unknown[]>;
 }
 
-export function get_update_versions_summaries_mutation_options(
-  opts: MutationOptionsFactory<get_update_versions_summaries_params, get_update_versions_summaries_result>
-) {
-  return {
-    mutationKey: ["get_update_versions_summaries"] as const,
-    mutationFn: (params: get_update_versions_summaries_params) => api.get_update_versions_summaries(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_update_versions_summaries_result, unknown, get_update_versions_summaries_params>;
-}
-
 export function get_update_versions_vehicles_query_options(
   opts: QueryOptionsFactory<get_update_versions_vehicles_params, get_update_versions_vehicles_result>
 ) {
@@ -1873,16 +1063,6 @@ export function get_update_versions_vehicles_query_options(
     queryFn: () => api.get_update_versions_vehicles(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_update_versions_vehicles_result, unknown, get_update_versions_vehicles_result, readonly unknown[]>;
-}
-
-export function get_update_versions_vehicles_mutation_options(
-  opts: MutationOptionsFactory<get_update_versions_vehicles_params, get_update_versions_vehicles_result>
-) {
-  return {
-    mutationKey: ["get_update_versions_vehicles"] as const,
-    mutationFn: (params: get_update_versions_vehicles_params) => api.get_update_versions_vehicles(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_update_versions_vehicles_result, unknown, get_update_versions_vehicles_params>;
 }
 
 export function get_user_by_id_query_options(
@@ -1895,16 +1075,6 @@ export function get_user_by_id_query_options(
   } satisfies UseQueryOptions<get_user_by_id_result, unknown, get_user_by_id_result, readonly unknown[]>;
 }
 
-export function get_user_by_id_mutation_options(
-  opts: MutationOptionsFactory<get_user_by_id_params, get_user_by_id_result>
-) {
-  return {
-    mutationKey: ["get_user_by_id"] as const,
-    mutationFn: (params: get_user_by_id_params) => api.get_user_by_id(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_user_by_id_result, unknown, get_user_by_id_params>;
-}
-
 export function get_user_capabilities_query_options(
   opts: QueryOptionsFactory<get_user_capabilities_params, get_user_capabilities_result>
 ) {
@@ -1913,16 +1083,6 @@ export function get_user_capabilities_query_options(
     queryFn: () => api.get_user_capabilities(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_user_capabilities_result, unknown, get_user_capabilities_result, readonly unknown[]>;
-}
-
-export function get_user_capabilities_mutation_options(
-  opts: MutationOptionsFactory<get_user_capabilities_params, get_user_capabilities_result>
-) {
-  return {
-    mutationKey: ["get_user_capabilities"] as const,
-    mutationFn: (params: get_user_capabilities_params) => api.get_user_capabilities(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_user_capabilities_result, unknown, get_user_capabilities_params>;
 }
 
 export function get_users_query_options(
@@ -1935,16 +1095,6 @@ export function get_users_query_options(
   } satisfies UseQueryOptions<get_users_result, unknown, get_users_result, readonly unknown[]>;
 }
 
-export function get_users_mutation_options(
-  opts: MutationOptionsFactory<get_users_params, get_users_result>
-) {
-  return {
-    mutationKey: ["get_users"] as const,
-    mutationFn: (params: get_users_params) => api.get_users(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_users_result, unknown, get_users_params>;
-}
-
 export function get_vehicle_conf_types_query_options(
   opts: QueryOptionsFactory<get_vehicle_conf_types_params, get_vehicle_conf_types_result>
 ) {
@@ -1953,16 +1103,6 @@ export function get_vehicle_conf_types_query_options(
     queryFn: () => api.get_vehicle_conf_types(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_vehicle_conf_types_result, unknown, get_vehicle_conf_types_result, readonly unknown[]>;
-}
-
-export function get_vehicle_conf_types_mutation_options(
-  opts: MutationOptionsFactory<get_vehicle_conf_types_params, get_vehicle_conf_types_result>
-) {
-  return {
-    mutationKey: ["get_vehicle_conf_types"] as const,
-    mutationFn: (params: get_vehicle_conf_types_params) => api.get_vehicle_conf_types(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_vehicle_conf_types_result, unknown, get_vehicle_conf_types_params>;
 }
 
 export function get_vehicle_configurations_query_options(
@@ -1975,16 +1115,6 @@ export function get_vehicle_configurations_query_options(
   } satisfies UseQueryOptions<get_vehicle_configurations_result, unknown, get_vehicle_configurations_result, readonly unknown[]>;
 }
 
-export function get_vehicle_configurations_mutation_options(
-  opts: MutationOptionsFactory<get_vehicle_configurations_params, get_vehicle_configurations_result>
-) {
-  return {
-    mutationKey: ["get_vehicle_configurations"] as const,
-    mutationFn: (params: get_vehicle_configurations_params) => api.get_vehicle_configurations(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_vehicle_configurations_result, unknown, get_vehicle_configurations_params>;
-}
-
 export function get_vehicle_drivers_history_query_options(
   opts: QueryOptionsFactory<get_vehicle_drivers_history_params, get_vehicle_drivers_history_result>
 ) {
@@ -1993,16 +1123,6 @@ export function get_vehicle_drivers_history_query_options(
     queryFn: () => api.get_vehicle_drivers_history(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_vehicle_drivers_history_result, unknown, get_vehicle_drivers_history_result, readonly unknown[]>;
-}
-
-export function get_vehicle_drivers_history_mutation_options(
-  opts: MutationOptionsFactory<get_vehicle_drivers_history_params, get_vehicle_drivers_history_result>
-) {
-  return {
-    mutationKey: ["get_vehicle_drivers_history"] as const,
-    mutationFn: (params: get_vehicle_drivers_history_params) => api.get_vehicle_drivers_history(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_vehicle_drivers_history_result, unknown, get_vehicle_drivers_history_params>;
 }
 
 export function get_vehicle_errors_history_query_options(
@@ -2015,16 +1135,6 @@ export function get_vehicle_errors_history_query_options(
   } satisfies UseQueryOptions<get_vehicle_errors_history_result, unknown, get_vehicle_errors_history_result, readonly unknown[]>;
 }
 
-export function get_vehicle_errors_history_mutation_options(
-  opts: MutationOptionsFactory<get_vehicle_errors_history_params, get_vehicle_errors_history_result>
-) {
-  return {
-    mutationKey: ["get_vehicle_errors_history"] as const,
-    mutationFn: (params: get_vehicle_errors_history_params) => api.get_vehicle_errors_history(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_vehicle_errors_history_result, unknown, get_vehicle_errors_history_params>;
-}
-
 export function get_vehicle_errors_history_vlv20240524_query_options(
   opts: QueryOptionsFactory<get_vehicle_errors_history_vlv20240524_params, get_vehicle_errors_history_vlv20240524_result>
 ) {
@@ -2033,16 +1143,6 @@ export function get_vehicle_errors_history_vlv20240524_query_options(
     queryFn: () => api.get_vehicle_errors_history_vlv20240524(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_vehicle_errors_history_vlv20240524_result, unknown, get_vehicle_errors_history_vlv20240524_result, readonly unknown[]>;
-}
-
-export function get_vehicle_errors_history_vlv20240524_mutation_options(
-  opts: MutationOptionsFactory<get_vehicle_errors_history_vlv20240524_params, get_vehicle_errors_history_vlv20240524_result>
-) {
-  return {
-    mutationKey: ["get_vehicle_errors_history_vlv20240524"] as const,
-    mutationFn: (params: get_vehicle_errors_history_vlv20240524_params) => api.get_vehicle_errors_history_vlv20240524(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_vehicle_errors_history_vlv20240524_result, unknown, get_vehicle_errors_history_vlv20240524_params>;
 }
 
 export function get_vehicle_online_state_query_options(
@@ -2055,16 +1155,6 @@ export function get_vehicle_online_state_query_options(
   } satisfies UseQueryOptions<get_vehicle_online_state_result, unknown, get_vehicle_online_state_result, readonly unknown[]>;
 }
 
-export function get_vehicle_online_state_mutation_options(
-  opts: MutationOptionsFactory<get_vehicle_online_state_params, get_vehicle_online_state_result>
-) {
-  return {
-    mutationKey: ["get_vehicle_online_state"] as const,
-    mutationFn: (params: get_vehicle_online_state_params) => api.get_vehicle_online_state(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_vehicle_online_state_result, unknown, get_vehicle_online_state_params>;
-}
-
 export function get_vehicle_peripheral_names_query_options(
   opts: QueryOptionsFactory<get_vehicle_peripheral_names_params, get_vehicle_peripheral_names_result>
 ) {
@@ -2073,16 +1163,6 @@ export function get_vehicle_peripheral_names_query_options(
     queryFn: () => api.get_vehicle_peripheral_names(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_vehicle_peripheral_names_result, unknown, get_vehicle_peripheral_names_result, readonly unknown[]>;
-}
-
-export function get_vehicle_peripheral_names_mutation_options(
-  opts: MutationOptionsFactory<get_vehicle_peripheral_names_params, get_vehicle_peripheral_names_result>
-) {
-  return {
-    mutationKey: ["get_vehicle_peripheral_names"] as const,
-    mutationFn: (params: get_vehicle_peripheral_names_params) => api.get_vehicle_peripheral_names(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_vehicle_peripheral_names_result, unknown, get_vehicle_peripheral_names_params>;
 }
 
 export function get_vehicle_peripheral_types_query_options(
@@ -2095,16 +1175,6 @@ export function get_vehicle_peripheral_types_query_options(
   } satisfies UseQueryOptions<get_vehicle_peripheral_types_result, unknown, get_vehicle_peripheral_types_result, readonly unknown[]>;
 }
 
-export function get_vehicle_peripheral_types_mutation_options(
-  opts: MutationOptionsFactory<get_vehicle_peripheral_types_params, get_vehicle_peripheral_types_result>
-) {
-  return {
-    mutationKey: ["get_vehicle_peripheral_types"] as const,
-    mutationFn: (params: get_vehicle_peripheral_types_params) => api.get_vehicle_peripheral_types(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_vehicle_peripheral_types_result, unknown, get_vehicle_peripheral_types_params>;
-}
-
 export function get_vehicle_peripherals_query_options(
   opts: QueryOptionsFactory<get_vehicle_peripherals_params, get_vehicle_peripherals_result>
 ) {
@@ -2113,16 +1183,6 @@ export function get_vehicle_peripherals_query_options(
     queryFn: () => api.get_vehicle_peripherals(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_vehicle_peripherals_result, unknown, get_vehicle_peripherals_result, readonly unknown[]>;
-}
-
-export function get_vehicle_peripherals_mutation_options(
-  opts: MutationOptionsFactory<get_vehicle_peripherals_params, get_vehicle_peripherals_result>
-) {
-  return {
-    mutationKey: ["get_vehicle_peripherals"] as const,
-    mutationFn: (params: get_vehicle_peripherals_params) => api.get_vehicle_peripherals(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_vehicle_peripherals_result, unknown, get_vehicle_peripherals_params>;
 }
 
 export function get_vehicle_peripherals_1_query_options(
@@ -2135,16 +1195,6 @@ export function get_vehicle_peripherals_1_query_options(
   } satisfies UseQueryOptions<get_vehicle_peripherals_1_result, unknown, get_vehicle_peripherals_1_result, readonly unknown[]>;
 }
 
-export function get_vehicle_peripherals_1_mutation_options(
-  opts: MutationOptionsFactory<get_vehicle_peripherals_1_params, get_vehicle_peripherals_1_result>
-) {
-  return {
-    mutationKey: ["get_vehicle_peripherals_1"] as const,
-    mutationFn: (params: get_vehicle_peripherals_1_params) => api.get_vehicle_peripherals_1(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_vehicle_peripherals_1_result, unknown, get_vehicle_peripherals_1_params>;
-}
-
 export function get_vehicle_states_and_versions_query_options(
   opts: QueryOptionsFactory<get_vehicle_states_and_versions_params, get_vehicle_states_and_versions_result>
 ) {
@@ -2153,16 +1203,6 @@ export function get_vehicle_states_and_versions_query_options(
     queryFn: () => api.get_vehicle_states_and_versions(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_vehicle_states_and_versions_result, unknown, get_vehicle_states_and_versions_result, readonly unknown[]>;
-}
-
-export function get_vehicle_states_and_versions_mutation_options(
-  opts: MutationOptionsFactory<get_vehicle_states_and_versions_params, get_vehicle_states_and_versions_result>
-) {
-  return {
-    mutationKey: ["get_vehicle_states_and_versions"] as const,
-    mutationFn: (params: get_vehicle_states_and_versions_params) => api.get_vehicle_states_and_versions(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_vehicle_states_and_versions_result, unknown, get_vehicle_states_and_versions_params>;
 }
 
 export function get_vehicle_update_request_query_options(
@@ -2175,16 +1215,6 @@ export function get_vehicle_update_request_query_options(
   } satisfies UseQueryOptions<get_vehicle_update_request_result, unknown, get_vehicle_update_request_result, readonly unknown[]>;
 }
 
-export function get_vehicle_update_request_mutation_options(
-  opts: MutationOptionsFactory<get_vehicle_update_request_params, get_vehicle_update_request_result>
-) {
-  return {
-    mutationKey: ["get_vehicle_update_request"] as const,
-    mutationFn: (params: get_vehicle_update_request_params) => api.get_vehicle_update_request(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_vehicle_update_request_result, unknown, get_vehicle_update_request_params>;
-}
-
 export function get_vehicle_updates_ui_lock_requests_query_options(
   opts: QueryOptionsFactory<get_vehicle_updates_ui_lock_requests_params, get_vehicle_updates_ui_lock_requests_result>
 ) {
@@ -2193,16 +1223,6 @@ export function get_vehicle_updates_ui_lock_requests_query_options(
     queryFn: () => api.get_vehicle_updates_ui_lock_requests(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_vehicle_updates_ui_lock_requests_result, unknown, get_vehicle_updates_ui_lock_requests_result, readonly unknown[]>;
-}
-
-export function get_vehicle_updates_ui_lock_requests_mutation_options(
-  opts: MutationOptionsFactory<get_vehicle_updates_ui_lock_requests_params, get_vehicle_updates_ui_lock_requests_result>
-) {
-  return {
-    mutationKey: ["get_vehicle_updates_ui_lock_requests"] as const,
-    mutationFn: (params: get_vehicle_updates_ui_lock_requests_params) => api.get_vehicle_updates_ui_lock_requests(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_vehicle_updates_ui_lock_requests_result, unknown, get_vehicle_updates_ui_lock_requests_params>;
 }
 
 export function get_vehicles_query_options(
@@ -2215,16 +1235,6 @@ export function get_vehicles_query_options(
   } satisfies UseQueryOptions<get_vehicles_result, unknown, get_vehicles_result, readonly unknown[]>;
 }
 
-export function get_vehicles_mutation_options(
-  opts: MutationOptionsFactory<get_vehicles_params, get_vehicles_result>
-) {
-  return {
-    mutationKey: ["get_vehicles"] as const,
-    mutationFn: (params: get_vehicles_params) => api.get_vehicles(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_vehicles_result, unknown, get_vehicles_params>;
-}
-
 export function get_vehicles_actual_state_query_options(
   opts: QueryOptionsFactory<get_vehicles_actual_state_params, get_vehicles_actual_state_result>
 ) {
@@ -2233,16 +1243,6 @@ export function get_vehicles_actual_state_query_options(
     queryFn: () => api.get_vehicles_actual_state(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_vehicles_actual_state_result, unknown, get_vehicles_actual_state_result, readonly unknown[]>;
-}
-
-export function get_vehicles_actual_state_mutation_options(
-  opts: MutationOptionsFactory<get_vehicles_actual_state_params, get_vehicles_actual_state_result>
-) {
-  return {
-    mutationKey: ["get_vehicles_actual_state"] as const,
-    mutationFn: (params: get_vehicles_actual_state_params) => api.get_vehicles_actual_state(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_vehicles_actual_state_result, unknown, get_vehicles_actual_state_params>;
 }
 
 export function get_vehicles_actual_state__query_options(
@@ -2255,16 +1255,6 @@ export function get_vehicles_actual_state__query_options(
   } satisfies UseQueryOptions<get_vehicles_actual_state__result, unknown, get_vehicles_actual_state__result, readonly unknown[]>;
 }
 
-export function get_vehicles_actual_state__mutation_options(
-  opts: MutationOptionsFactory<get_vehicles_actual_state__params, get_vehicles_actual_state__result>
-) {
-  return {
-    mutationKey: ["get_vehicles_actual_state_"] as const,
-    mutationFn: (params: get_vehicles_actual_state__params) => api.get_vehicles_actual_state_(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_vehicles_actual_state__result, unknown, get_vehicles_actual_state__params>;
-}
-
 export function get_vehicles_actual_state_2_query_options(
   opts: QueryOptionsFactory<get_vehicles_actual_state_2_params, get_vehicles_actual_state_2_result>
 ) {
@@ -2273,16 +1263,6 @@ export function get_vehicles_actual_state_2_query_options(
     queryFn: () => api.get_vehicles_actual_state_2(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_vehicles_actual_state_2_result, unknown, get_vehicles_actual_state_2_result, readonly unknown[]>;
-}
-
-export function get_vehicles_actual_state_2_mutation_options(
-  opts: MutationOptionsFactory<get_vehicles_actual_state_2_params, get_vehicles_actual_state_2_result>
-) {
-  return {
-    mutationKey: ["get_vehicles_actual_state_2"] as const,
-    mutationFn: (params: get_vehicles_actual_state_2_params) => api.get_vehicles_actual_state_2(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_vehicles_actual_state_2_result, unknown, get_vehicles_actual_state_2_params>;
 }
 
 export function get_vehicles_actual_state_3_query_options(
@@ -2295,16 +1275,6 @@ export function get_vehicles_actual_state_3_query_options(
   } satisfies UseQueryOptions<get_vehicles_actual_state_3_result, unknown, get_vehicles_actual_state_3_result, readonly unknown[]>;
 }
 
-export function get_vehicles_actual_state_3_mutation_options(
-  opts: MutationOptionsFactory<get_vehicles_actual_state_3_params, get_vehicles_actual_state_3_result>
-) {
-  return {
-    mutationKey: ["get_vehicles_actual_state_3"] as const,
-    mutationFn: (params: get_vehicles_actual_state_3_params) => api.get_vehicles_actual_state_3(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_vehicles_actual_state_3_result, unknown, get_vehicles_actual_state_3_params>;
-}
-
 export function get_vehicles_actual_state_4_query_options(
   opts: QueryOptionsFactory<get_vehicles_actual_state_4_params, get_vehicles_actual_state_4_result>
 ) {
@@ -2313,16 +1283,6 @@ export function get_vehicles_actual_state_4_query_options(
     queryFn: () => api.get_vehicles_actual_state_4(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_vehicles_actual_state_4_result, unknown, get_vehicles_actual_state_4_result, readonly unknown[]>;
-}
-
-export function get_vehicles_actual_state_4_mutation_options(
-  opts: MutationOptionsFactory<get_vehicles_actual_state_4_params, get_vehicles_actual_state_4_result>
-) {
-  return {
-    mutationKey: ["get_vehicles_actual_state_4"] as const,
-    mutationFn: (params: get_vehicles_actual_state_4_params) => api.get_vehicles_actual_state_4(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_vehicles_actual_state_4_result, unknown, get_vehicles_actual_state_4_params>;
 }
 
 export function get_versions_from_all_vehicles_query_options(
@@ -2335,16 +1295,6 @@ export function get_versions_from_all_vehicles_query_options(
   } satisfies UseQueryOptions<get_versions_from_all_vehicles_result, unknown, get_versions_from_all_vehicles_result, readonly unknown[]>;
 }
 
-export function get_versions_from_all_vehicles_mutation_options(
-  opts: MutationOptionsFactory<get_versions_from_all_vehicles_params, get_versions_from_all_vehicles_result>
-) {
-  return {
-    mutationKey: ["get_versions_from_all_vehicles"] as const,
-    mutationFn: (params: get_versions_from_all_vehicles_params) => api.get_versions_from_all_vehicles(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_versions_from_all_vehicles_result, unknown, get_versions_from_all_vehicles_params>;
-}
-
 export function get_versions_from_all_vehicles_with_peripherals_query_options(
   opts: QueryOptionsFactory<get_versions_from_all_vehicles_with_peripherals_params, get_versions_from_all_vehicles_with_peripherals_result>
 ) {
@@ -2353,16 +1303,6 @@ export function get_versions_from_all_vehicles_with_peripherals_query_options(
     queryFn: () => api.get_versions_from_all_vehicles_with_peripherals(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_versions_from_all_vehicles_with_peripherals_result, unknown, get_versions_from_all_vehicles_with_peripherals_result, readonly unknown[]>;
-}
-
-export function get_versions_from_all_vehicles_with_peripherals_mutation_options(
-  opts: MutationOptionsFactory<get_versions_from_all_vehicles_with_peripherals_params, get_versions_from_all_vehicles_with_peripherals_result>
-) {
-  return {
-    mutationKey: ["get_versions_from_all_vehicles_with_peripherals"] as const,
-    mutationFn: (params: get_versions_from_all_vehicles_with_peripherals_params) => api.get_versions_from_all_vehicles_with_peripherals(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_versions_from_all_vehicles_with_peripherals_result, unknown, get_versions_from_all_vehicles_with_peripherals_params>;
 }
 
 export function get_versions_from_vehicle_histor_old_query_options(
@@ -2375,16 +1315,6 @@ export function get_versions_from_vehicle_histor_old_query_options(
   } satisfies UseQueryOptions<get_versions_from_vehicle_histor_old_result, unknown, get_versions_from_vehicle_histor_old_result, readonly unknown[]>;
 }
 
-export function get_versions_from_vehicle_histor_old_mutation_options(
-  opts: MutationOptionsFactory<get_versions_from_vehicle_histor_old_params, get_versions_from_vehicle_histor_old_result>
-) {
-  return {
-    mutationKey: ["get_versions_from_vehicle_histor_old"] as const,
-    mutationFn: (params: get_versions_from_vehicle_histor_old_params) => api.get_versions_from_vehicle_histor_old(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_versions_from_vehicle_histor_old_result, unknown, get_versions_from_vehicle_histor_old_params>;
-}
-
 export function get_versions_from_vehicle_history_query_options(
   opts: QueryOptionsFactory<get_versions_from_vehicle_history_params, get_versions_from_vehicle_history_result>
 ) {
@@ -2393,16 +1323,6 @@ export function get_versions_from_vehicle_history_query_options(
     queryFn: () => api.get_versions_from_vehicle_history(opts.params, opts.axios),
     ...(opts.query ?? {}),
   } satisfies UseQueryOptions<get_versions_from_vehicle_history_result, unknown, get_versions_from_vehicle_history_result, readonly unknown[]>;
-}
-
-export function get_versions_from_vehicle_history_mutation_options(
-  opts: MutationOptionsFactory<get_versions_from_vehicle_history_params, get_versions_from_vehicle_history_result>
-) {
-  return {
-    mutationKey: ["get_versions_from_vehicle_history"] as const,
-    mutationFn: (params: get_versions_from_vehicle_history_params) => api.get_versions_from_vehicle_history(params, opts.axios),
-    ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<get_versions_from_vehicle_history_result, unknown, get_versions_from_vehicle_history_params>;
 }
 
 export function inactivate_auth_token_query_options(
@@ -2645,16 +1565,6 @@ export function unlock_vehicle_updates_ui_mutation_options(
   } satisfies UseMutationOptions<unlock_vehicle_updates_ui_result, unknown, unlock_vehicle_updates_ui_params>;
 }
 
-export function update_company_query_options(
-  opts: QueryOptionsFactory<update_company_params, update_company_result>
-) {
-  return {
-    queryKey: ["update_company", opts.params] as const,
-    queryFn: () => api.update_company(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<update_company_result, unknown, update_company_result, readonly unknown[]>;
-}
-
 export function update_company_mutation_options(
   opts: MutationOptionsFactory<update_company_params, update_company_result>
 ) {
@@ -2663,16 +1573,6 @@ export function update_company_mutation_options(
     mutationFn: (params: update_company_params) => api.update_company(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<update_company_result, unknown, update_company_params>;
-}
-
-export function update_company_section_query_options(
-  opts: QueryOptionsFactory<update_company_section_params, update_company_section_result>
-) {
-  return {
-    queryKey: ["update_company_section", opts.params] as const,
-    queryFn: () => api.update_company_section(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<update_company_section_result, unknown, update_company_section_result, readonly unknown[]>;
 }
 
 export function update_company_section_mutation_options(
@@ -2685,16 +1585,6 @@ export function update_company_section_mutation_options(
   } satisfies UseMutationOptions<update_company_section_result, unknown, update_company_section_params>;
 }
 
-export function update_crossroad_query_options(
-  opts: QueryOptionsFactory<update_crossroad_params, update_crossroad_result>
-) {
-  return {
-    queryKey: ["update_crossroad", opts.params] as const,
-    queryFn: () => api.update_crossroad(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<update_crossroad_result, unknown, update_crossroad_result, readonly unknown[]>;
-}
-
 export function update_crossroad_mutation_options(
   opts: MutationOptionsFactory<update_crossroad_params, update_crossroad_result>
 ) {
@@ -2703,16 +1593,6 @@ export function update_crossroad_mutation_options(
     mutationFn: (params: update_crossroad_params) => api.update_crossroad(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<update_crossroad_result, unknown, update_crossroad_params>;
-}
-
-export function update_crossroad_branch_query_options(
-  opts: QueryOptionsFactory<update_crossroad_branch_params, update_crossroad_branch_result>
-) {
-  return {
-    queryKey: ["update_crossroad_branch", opts.params] as const,
-    queryFn: () => api.update_crossroad_branch(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<update_crossroad_branch_result, unknown, update_crossroad_branch_result, readonly unknown[]>;
 }
 
 export function update_crossroad_branch_mutation_options(
@@ -2725,16 +1605,6 @@ export function update_crossroad_branch_mutation_options(
   } satisfies UseMutationOptions<update_crossroad_branch_result, unknown, update_crossroad_branch_params>;
 }
 
-export function update_crossroad_branch_checkin_point_query_options(
-  opts: QueryOptionsFactory<update_crossroad_branch_checkin_point_params, update_crossroad_branch_checkin_point_result>
-) {
-  return {
-    queryKey: ["update_crossroad_branch_checkin_point", opts.params] as const,
-    queryFn: () => api.update_crossroad_branch_checkin_point(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<update_crossroad_branch_checkin_point_result, unknown, update_crossroad_branch_checkin_point_result, readonly unknown[]>;
-}
-
 export function update_crossroad_branch_checkin_point_mutation_options(
   opts: MutationOptionsFactory<update_crossroad_branch_checkin_point_params, update_crossroad_branch_checkin_point_result>
 ) {
@@ -2743,16 +1613,6 @@ export function update_crossroad_branch_checkin_point_mutation_options(
     mutationFn: (params: update_crossroad_branch_checkin_point_params) => api.update_crossroad_branch_checkin_point(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<update_crossroad_branch_checkin_point_result, unknown, update_crossroad_branch_checkin_point_params>;
-}
-
-export function update_crossroad_branch_checkin_points_order_query_options(
-  opts: QueryOptionsFactory<update_crossroad_branch_checkin_points_order_params, update_crossroad_branch_checkin_points_order_result>
-) {
-  return {
-    queryKey: ["update_crossroad_branch_checkin_points_order", opts.params] as const,
-    queryFn: () => api.update_crossroad_branch_checkin_points_order(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<update_crossroad_branch_checkin_points_order_result, unknown, update_crossroad_branch_checkin_points_order_result, readonly unknown[]>;
 }
 
 export function update_crossroad_branch_checkin_points_order_mutation_options(
@@ -2765,16 +1625,6 @@ export function update_crossroad_branch_checkin_points_order_mutation_options(
   } satisfies UseMutationOptions<update_crossroad_branch_checkin_points_order_result, unknown, update_crossroad_branch_checkin_points_order_params>;
 }
 
-export function update_crossroad_checkout_point_query_options(
-  opts: QueryOptionsFactory<update_crossroad_checkout_point_params, update_crossroad_checkout_point_result>
-) {
-  return {
-    queryKey: ["update_crossroad_checkout_point", opts.params] as const,
-    queryFn: () => api.update_crossroad_checkout_point(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<update_crossroad_checkout_point_result, unknown, update_crossroad_checkout_point_result, readonly unknown[]>;
-}
-
 export function update_crossroad_checkout_point_mutation_options(
   opts: MutationOptionsFactory<update_crossroad_checkout_point_params, update_crossroad_checkout_point_result>
 ) {
@@ -2783,16 +1633,6 @@ export function update_crossroad_checkout_point_mutation_options(
     mutationFn: (params: update_crossroad_checkout_point_params) => api.update_crossroad_checkout_point(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<update_crossroad_checkout_point_result, unknown, update_crossroad_checkout_point_params>;
-}
-
-export function update_crossroad_direction_query_options(
-  opts: QueryOptionsFactory<update_crossroad_direction_params, update_crossroad_direction_result>
-) {
-  return {
-    queryKey: ["update_crossroad_direction", opts.params] as const,
-    queryFn: () => api.update_crossroad_direction(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<update_crossroad_direction_result, unknown, update_crossroad_direction_result, readonly unknown[]>;
 }
 
 export function update_crossroad_direction_mutation_options(
@@ -2805,16 +1645,6 @@ export function update_crossroad_direction_mutation_options(
   } satisfies UseMutationOptions<update_crossroad_direction_result, unknown, update_crossroad_direction_params>;
 }
 
-export function update_crossroad_geo_point_query_options(
-  opts: QueryOptionsFactory<update_crossroad_geo_point_params, update_crossroad_geo_point_result>
-) {
-  return {
-    queryKey: ["update_crossroad_geo_point", opts.params] as const,
-    queryFn: () => api.update_crossroad_geo_point(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<update_crossroad_geo_point_result, unknown, update_crossroad_geo_point_result, readonly unknown[]>;
-}
-
 export function update_crossroad_geo_point_mutation_options(
   opts: MutationOptionsFactory<update_crossroad_geo_point_params, update_crossroad_geo_point_result>
 ) {
@@ -2823,16 +1653,6 @@ export function update_crossroad_geo_point_mutation_options(
     mutationFn: (params: update_crossroad_geo_point_params) => api.update_crossroad_geo_point(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<update_crossroad_geo_point_result, unknown, update_crossroad_geo_point_params>;
-}
-
-export function update_stop_panel_query_options(
-  opts: QueryOptionsFactory<update_stop_panel_params, update_stop_panel_result>
-) {
-  return {
-    queryKey: ["update_stop_panel", opts.params] as const,
-    queryFn: () => api.update_stop_panel(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<update_stop_panel_result, unknown, update_stop_panel_result, readonly unknown[]>;
 }
 
 export function update_stop_panel_mutation_options(
@@ -2845,16 +1665,6 @@ export function update_stop_panel_mutation_options(
   } satisfies UseMutationOptions<update_stop_panel_result, unknown, update_stop_panel_params>;
 }
 
-export function update_stop_panel_active_query_options(
-  opts: QueryOptionsFactory<update_stop_panel_active_params, update_stop_panel_active_result>
-) {
-  return {
-    queryKey: ["update_stop_panel_active", opts.params] as const,
-    queryFn: () => api.update_stop_panel_active(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<update_stop_panel_active_result, unknown, update_stop_panel_active_result, readonly unknown[]>;
-}
-
 export function update_stop_panel_active_mutation_options(
   opts: MutationOptionsFactory<update_stop_panel_active_params, update_stop_panel_active_result>
 ) {
@@ -2863,16 +1673,6 @@ export function update_stop_panel_active_mutation_options(
     mutationFn: (params: update_stop_panel_active_params) => api.update_stop_panel_active(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<update_stop_panel_active_result, unknown, update_stop_panel_active_params>;
-}
-
-export function update_stop_panel_components_query_options(
-  opts: QueryOptionsFactory<update_stop_panel_components_params, update_stop_panel_components_result>
-) {
-  return {
-    queryKey: ["update_stop_panel_components", opts.params] as const,
-    queryFn: () => api.update_stop_panel_components(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<update_stop_panel_components_result, unknown, update_stop_panel_components_result, readonly unknown[]>;
 }
 
 export function update_stop_panel_components_mutation_options(
@@ -2885,16 +1685,6 @@ export function update_stop_panel_components_mutation_options(
   } satisfies UseMutationOptions<update_stop_panel_components_result, unknown, update_stop_panel_components_params>;
 }
 
-export function update_stop_panel_hw_state_query_options(
-  opts: QueryOptionsFactory<update_stop_panel_hw_state_params, update_stop_panel_hw_state_result>
-) {
-  return {
-    queryKey: ["update_stop_panel_hw_state", opts.params] as const,
-    queryFn: () => api.update_stop_panel_hw_state(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<update_stop_panel_hw_state_result, unknown, update_stop_panel_hw_state_result, readonly unknown[]>;
-}
-
 export function update_stop_panel_hw_state_mutation_options(
   opts: MutationOptionsFactory<update_stop_panel_hw_state_params, update_stop_panel_hw_state_result>
 ) {
@@ -2903,16 +1693,6 @@ export function update_stop_panel_hw_state_mutation_options(
     mutationFn: (params: update_stop_panel_hw_state_params) => api.update_stop_panel_hw_state(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<update_stop_panel_hw_state_result, unknown, update_stop_panel_hw_state_params>;
-}
-
-export function update_stop_panel_layout_query_options(
-  opts: QueryOptionsFactory<update_stop_panel_layout_params, update_stop_panel_layout_result>
-) {
-  return {
-    queryKey: ["update_stop_panel_layout", opts.params] as const,
-    queryFn: () => api.update_stop_panel_layout(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<update_stop_panel_layout_result, unknown, update_stop_panel_layout_result, readonly unknown[]>;
 }
 
 export function update_stop_panel_layout_mutation_options(
@@ -2925,16 +1705,6 @@ export function update_stop_panel_layout_mutation_options(
   } satisfies UseMutationOptions<update_stop_panel_layout_result, unknown, update_stop_panel_layout_params>;
 }
 
-export function update_stop_panel_stop_query_options(
-  opts: QueryOptionsFactory<update_stop_panel_stop_params, update_stop_panel_stop_result>
-) {
-  return {
-    queryKey: ["update_stop_panel_stop", opts.params] as const,
-    queryFn: () => api.update_stop_panel_stop(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<update_stop_panel_stop_result, unknown, update_stop_panel_stop_result, readonly unknown[]>;
-}
-
 export function update_stop_panel_stop_mutation_options(
   opts: MutationOptionsFactory<update_stop_panel_stop_params, update_stop_panel_stop_result>
 ) {
@@ -2943,16 +1713,6 @@ export function update_stop_panel_stop_mutation_options(
     mutationFn: (params: update_stop_panel_stop_params) => api.update_stop_panel_stop(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<update_stop_panel_stop_result, unknown, update_stop_panel_stop_params>;
-}
-
-export function update_stop_panel_user_params_query_options(
-  opts: QueryOptionsFactory<update_stop_panel_user_params_params, update_stop_panel_user_params_result>
-) {
-  return {
-    queryKey: ["update_stop_panel_user_params", opts.params] as const,
-    queryFn: () => api.update_stop_panel_user_params(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<update_stop_panel_user_params_result, unknown, update_stop_panel_user_params_result, readonly unknown[]>;
 }
 
 export function update_stop_panel_user_params_mutation_options(
@@ -2965,16 +1725,6 @@ export function update_stop_panel_user_params_mutation_options(
   } satisfies UseMutationOptions<update_stop_panel_user_params_result, unknown, update_stop_panel_user_params_params>;
 }
 
-export function update_user_query_options(
-  opts: QueryOptionsFactory<update_user_params, update_user_result>
-) {
-  return {
-    queryKey: ["update_user", opts.params] as const,
-    queryFn: () => api.update_user(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<update_user_result, unknown, update_user_result, readonly unknown[]>;
-}
-
 export function update_user_mutation_options(
   opts: MutationOptionsFactory<update_user_params, update_user_result>
 ) {
@@ -2983,16 +1733,6 @@ export function update_user_mutation_options(
     mutationFn: (params: update_user_params) => api.update_user(params, opts.axios),
     ...(opts.mutation ?? {}),
   } satisfies UseMutationOptions<update_user_result, unknown, update_user_params>;
-}
-
-export function update_user_password_query_options(
-  opts: QueryOptionsFactory<update_user_password_params, update_user_password_result>
-) {
-  return {
-    queryKey: ["update_user_password", opts.params] as const,
-    queryFn: () => api.update_user_password(opts.params, opts.axios),
-    ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<update_user_password_result, unknown, update_user_password_result, readonly unknown[]>;
 }
 
 export function update_user_password_mutation_options(
