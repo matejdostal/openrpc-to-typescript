@@ -99,6 +99,60 @@ const camel = (s) => {
   return p ? p[0].toLowerCase() + p.slice(1) : p;
 };
 
+/* detect snake_case */
+const isSnakeCase = (s) => /^[a-z][a-z0-9]*(_[a-z0-9]+)*$/.test(String(s));
+
+/* collect all snake_case property names from schema recursively */
+function collectSnakeProps(schema, schemas, seen = new Set()) {
+  const props = new Set();
+  if (!schema || typeof schema !== "object") return props;
+
+  // Handle $ref
+  if (schema.$ref) {
+    const refTypeName = refName(schema.$ref);
+    if (seen.has(refTypeName)) return props; // avoid circular refs
+    seen.add(refTypeName);
+    const refSchema = schemas[refTypeName];
+    if (refSchema) {
+      for (const p of collectSnakeProps(refSchema, schemas, seen)) {
+        props.add(p);
+      }
+    }
+    return props;
+  }
+
+  // Handle object properties
+  if (schema.type === "object" && schema.properties) {
+    for (const [key, value] of Object.entries(schema.properties)) {
+      if (isSnakeCase(key)) props.add(key);
+      for (const p of collectSnakeProps(value, schemas, seen)) {
+        props.add(p);
+      }
+    }
+  }
+
+  // Handle arrays
+  if (schema.type === "array" && schema.items) {
+    for (const p of collectSnakeProps(schema.items, schemas, seen)) {
+      props.add(p);
+    }
+  }
+
+  return props;
+}
+
+/* convert object keys */
+function transformKeys(obj, keyMap) {
+  if (!obj || typeof obj !== "object") return obj;
+  if (Array.isArray(obj)) return obj.map((item) => transformKeys(item, keyMap));
+  const result = {};
+  for (const [key, value] of Object.entries(obj)) {
+    const newKey = keyMap[key] ?? key;
+    result[newKey] = transformKeys(value, keyMap);
+  }
+  return result;
+}
+
 /* snake id helpers: keep underscores, make TS-safe */
 function snakeIdent(s) {
   let out = String(s).replace(/[^A-Za-z0-9_]/g, "_");
@@ -109,7 +163,12 @@ function snakeIdent(s) {
 
 /* function identifiers */
 function safeFnIdent(n) {
-  // camelCase path (legacy)
+  // If not using snake_case mode and input is snake_case, convert to camelCase
+  if (!USE_SNAKE && isSnakeCase(n)) {
+    const c = camel(n);
+    return RESERVED.has(c) ? `${c}_` : c;
+  }
+  // Otherwise use legacy behavior
   const c = isIdent(n) ? n : camel(n);
   return RESERVED.has(c) ? `${c}_` : c;
 }
@@ -190,11 +249,17 @@ function buildOptionsSelector(optionsCfg) {
   };
 }
 
-function schemaToTs(s, schemas) {
+function schemaToTs(s, schemas, convertSnakeToCamel = false) {
   if (!s) return "unknown";
-  if (s.$ref) return refName(s.$ref) || "unknown";
+  if (s.$ref) {
+    const refTypeName = refName(s.$ref);
+    return convertSnakeToCamel && isSnakeCase(refTypeName)
+      ? pascal(refTypeName)
+      : refTypeName || "unknown";
+  }
   const t = s.type;
-  if (Array.isArray(t)) return t.map((x) => schemaToTs({ ...s, type: x }, schemas)).join(" | ");
+  if (Array.isArray(t))
+    return t.map((x) => schemaToTs({ ...s, type: x }, schemas, convertSnakeToCamel)).join(" | ");
   switch (t) {
     case "integer":
     case "number":
@@ -206,13 +271,14 @@ function schemaToTs(s, schemas) {
     case "boolean":
       return "boolean";
     case "array":
-      return `${schemaToTs(s.items, schemas)}[]`;
+      return `${schemaToTs(s.items, schemas, convertSnakeToCamel)}[]`;
     case "object": {
       const props = s.properties ?? {};
       const req = new Set(s.required ?? []);
       const rows = Object.entries(props).map(([k, v]) => {
+        const propName = convertSnakeToCamel && isSnakeCase(k) ? camel(k) : k;
         const opt = req.has(k) ? "" : "?";
-        return `  ${escProp(k)}${opt}: ${schemaToTs(v, schemas)};`;
+        return `  ${escProp(propName)}${opt}: ${schemaToTs(v, schemas, convertSnakeToCamel)};`;
       });
       return rows.length ? `{\n${rows.join("\n")}\n}` : "{}";
     }
@@ -236,7 +302,7 @@ async function main() {
   await mkdir(outDir, { recursive: true });
 
   await writeFile(join(outDir, "types.ts"), emitTypesTs(schemas, spec.methods), "utf8");
-  await writeFile(join(outDir, "api.ts"), emitApiTs(spec.methods), "utf8");
+  await writeFile(join(outDir, "api.ts"), emitApiTs(spec.methods, schemas), "utf8");
   await writeFile(join(outDir, "options.ts"), emitOptionsTs(spec.methods, optionsConfig), "utf8");
   await writeFile(join(outDir, "index.ts"), emitIndexTs(), "utf8");
 }
@@ -245,11 +311,13 @@ async function main() {
 function emitTypesTs(schemas, methods) {
   const out = [header("types.ts")];
 
-  // 1) Component schemas (preserve names exactly as in OpenRPC)
+  // 1) Component schemas
   for (const [name, sch] of Object.entries(schemas)) {
-    const ts = schemaToTs(sch, schemas);
-    if (sch?.type === "object" && ts.startsWith("{")) out.push(`export interface ${name} ${ts}\n`);
-    else out.push(`export type ${name} = ${ts};\n`);
+    const typeName = !USE_SNAKE && isSnakeCase(name) ? pascal(name) : name;
+    const ts = schemaToTs(sch, schemas, !USE_SNAKE);
+    if (sch?.type === "object" && ts.startsWith("{"))
+      out.push(`export interface ${typeName} ${ts}\n`);
+    else out.push(`export type ${typeName} = ${ts};\n`);
   }
 
   // 2) Params by method name
@@ -257,8 +325,9 @@ function emitTypesTs(schemas, methods) {
     const pName = P(m.name);
     const fields = (m.params ?? [])
       .map((p) => {
+        const paramName = !USE_SNAKE && isSnakeCase(p.name) ? camel(p.name) : p.name;
         const opt = p.required ? "" : "?";
-        return `  ${escProp(p.name)}${opt}: ${schemaToTs(p.schema ?? {}, schemas)};`;
+        return `  ${escProp(paramName)}${opt}: ${schemaToTs(p.schema ?? {}, schemas, !USE_SNAKE)};`;
       })
       .join("\n");
     out.push(`export interface ${pName} ${fields ? `{\n${fields}\n}` : "{}"}\n`);
@@ -270,9 +339,10 @@ function emitTypesTs(schemas, methods) {
     const rs = m?.result?.schema;
     if (rs?.$ref) {
       const target = refName(rs.$ref);
-      if (target !== rName) out.push(`export type ${rName} = ${target};\n`); // avoid "type X = X"
+      const convertedTarget = !USE_SNAKE && isSnakeCase(target) ? pascal(target) : target;
+      if (convertedTarget !== rName) out.push(`export type ${rName} = ${convertedTarget};\n`); // avoid "type X = X"
     } else if (rs) {
-      const ts = schemaToTs(rs, schemas);
+      const ts = schemaToTs(rs, schemas, !USE_SNAKE);
       if (rs.type === "object" && ts.startsWith("{")) out.push(`export interface ${rName} ${ts}\n`);
       else out.push(`export type ${rName} = ${ts};\n`);
     } else {
@@ -283,25 +353,96 @@ function emitTypesTs(schemas, methods) {
   return out.join("\n");
 }
 
-function emitApiTs(methods) {
+function emitApiTs(methods, schemas) {
   const allTypes = Array.from(new Set(methods.flatMap((m) => [P(m.name), R(m.name)])));
-  return [
+
+  // Check if we need transformations
+  const needsTransform =
+    !USE_SNAKE &&
+    methods.some((m) => {
+      const hasSnakeParams = (m.params ?? []).some((p) => isSnakeCase(p.name));
+      const resultSchema = m?.result?.schema;
+      const hasSnakeResult = resultSchema && collectSnakeProps(resultSchema, schemas).size > 0;
+      return hasSnakeParams || hasSnakeResult;
+    });
+
+  const lines = [
     header("api.ts"),
     `import type { AxiosRequestConfig } from "axios";`,
     `import { getRpcClient } from "../base";`,
     `import type { ${allTypes.join(", ")} } from "./types";`,
     ``,
-    `export const api = {`,
-    ...methods.map(
-      (m) =>
-        `  ${FN(m.name)}: (params: ${P(m.name)}, axios?: AxiosRequestConfig) =>` +
-        ` getRpcClient().call<${P(m.name)}, ${R(m.name)}>(${JSON.stringify(
+  ];
+
+  if (needsTransform) {
+    lines.push(`/* Transform helpers for snake_case <-> camelCase */`);
+    lines.push(`function transformKeys(obj: any, keyMap: Record<string, string>): any {`);
+    lines.push(`  if (!obj || typeof obj !== "object") return obj;`);
+    lines.push(
+      `  if (Array.isArray(obj)) return obj.map((item: any) => transformKeys(item, keyMap));`
+    );
+    lines.push(`  const result: any = {};`);
+    lines.push(`  for (const [key, value] of Object.entries(obj)) {`);
+    lines.push(`    const newKey = keyMap[key] ?? key;`);
+    lines.push(`    result[newKey] = transformKeys(value, keyMap);`);
+    lines.push(`  }`);
+    lines.push(`  return result;`);
+    lines.push(`}`);
+    lines.push(``);
+  }
+
+  lines.push(`export const api = {`);
+
+  for (const m of methods) {
+    const hasSnakeParams = !USE_SNAKE && (m.params ?? []).some((p) => isSnakeCase(p.name));
+    const resultSchema = m?.result?.schema;
+    const snakeResultProps =
+      !USE_SNAKE && resultSchema ? collectSnakeProps(resultSchema, schemas) : new Set();
+    const hasSnakeResult = snakeResultProps.size > 0;
+
+    if (hasSnakeParams || hasSnakeResult) {
+      lines.push(`  ${FN(m.name)}: async (params: ${P(m.name)}, axios?: AxiosRequestConfig) => {`);
+
+      if (hasSnakeParams) {
+        // Generate key mapping for params transformation (camelCase -> snake_case)
+        const paramsMap = (m.params ?? [])
+          .filter((p) => isSnakeCase(p.name))
+          .map((p) => `${camel(p.name)}: ${JSON.stringify(p.name)}`)
+          .join(", ");
+        lines.push(`    const transformedParams = transformKeys(params, { ${paramsMap} });`);
+      } else {
+        lines.push(`    const transformedParams = params;`);
+      }
+
+      lines.push(
+        `    const result = await getRpcClient().call<any, any>(${JSON.stringify(
           m.name
-        )}, params, axios),`
-    ),
-    `} as const;`,
-    ``,
-  ].join("\n");
+        )}, transformedParams, axios);`
+      );
+
+      if (hasSnakeResult) {
+        // Generate key mapping for result transformation (snake_case -> camelCase)
+        const resultMap = Array.from(snakeResultProps)
+          .map((prop) => `${prop}: ${JSON.stringify(camel(prop))}`)
+          .join(", ");
+        lines.push(`    return transformKeys(result, { ${resultMap} }) as ${R(m.name)};`);
+      } else {
+        lines.push(`    return result as ${R(m.name)};`);
+      }
+
+      lines.push(`  },`);
+    } else {
+      lines.push(
+        `  ${FN(m.name)}: (params: ${P(m.name)}, axios?: AxiosRequestConfig) =>` +
+          ` getRpcClient().call<${P(m.name)}, ${R(m.name)}>(${JSON.stringify(
+            m.name
+          )}, params, axios),`
+      );
+    }
+  }
+
+  lines.push(`} as const;`, ``);
+  return lines.join("\n");
 }
 
 function emitOptionsTs(methods, optionsConfig) {

@@ -1,0 +1,143 @@
+{
+  "openrpc": "1.2.6",
+  "info": {
+    "title": "User Management API",
+    "version": "1.0.1",
+    "description": "OpenRPC specification for the user CRUD API where method parameters are spread into the JSON-RPC params object."
+  },
+  "methods": [
+    {
+      "name": "get_users",
+      "summary": "Retrieve a list of users",
+      "params": [],
+      "result": {
+        "name": "result",
+        "schema": { "$ref": "#/components/schemas/get_users_result" }
+      }
+    },
+    {
+      "name": "get_user_by_id",
+      "summary": "Retrieve a user by ID",
+      "params": [
+        {
+          "name": "user_id",
+          "required": true,
+          "schema": { "type": "integer" }
+        }
+      ],
+      "result": {
+        "name": "result",
+        "schema": { "$ref": "#/components/schemas/get_user_by_id_result" }
+      }
+    },
+    {
+      "name": "create_user",
+      "summary": "Create a new user",
+      "params": [
+        {
+          "name": "user_name",
+          "required": true,
+          "schema": { "type": "string" }
+        },
+        {
+          "name": "user_email",
+          "required": false,
+          "schema": { "type": "string", "format": "email" }
+        }
+      ],
+      "result": {
+        "name": "result",
+        "schema": { "$ref": "#/components/schemas/create_user_result" }
+      }
+    },
+    {
+      "name": "update_user",
+      "summary": "Update an existing user",
+      "params": [
+        {
+          "name": "user_id",
+          "required": true,
+          "schema": { "type": "integer" }
+        },
+        {
+          "name": "user_name",
+          "required": false,
+          "schema": { "type": "string" }
+        },
+        {
+          "name": "user_email",
+          "required": false,
+          "schema": { "type": "string", "format": "email" }
+        }
+      ],
+      "result": {
+        "name": "result",
+        "schema": { "$ref": "#/components/schemas/update_user_result" }
+      }
+    },
+    {
+      "name": "delete_user",
+      "summary": "Delete a user by ID",
+      "params": [
+        {
+          "name": "user_id",
+          "required": true,
+          "schema": { "type": "integer" }
+        }
+      ],
+      "result": {
+        "name": "result",
+        "schema": { "$ref": "#/components/schemas/delete_user_result" }
+      }
+    }
+  ],
+  "components": {
+    "schemas": {
+      "user": {
+        "type": "object",
+        "properties": {
+          "user_id": { "type": "integer" },
+          "user_name": { "type": "string" },
+          "user_email": { "type": "string", "format": "email" }
+        },
+        "required": ["user_id", "user_name"]
+      },
+      "get_users_result": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/user" }
+          },
+          "total_count": { "type": "integer" }
+        },
+        "required": ["data"]
+      },
+      "get_user_by_id_result": {
+        "type": "object",
+        "properties": {
+          "data": { "$ref": "#/components/schemas/user" }
+        },
+        "required": ["data"]
+      },
+      "create_user_result": {
+        "type": "object",
+        "properties": {
+          "data": { "$ref": "#/components/schemas/user" }
+        },
+        "required": ["data"]
+      },
+      "update_user_result": {
+        "type": "object",
+        "properties": {
+          "data": { "$ref": "#/components/schemas/user" }
+        },
+        "required": ["data"]
+      },
+      "delete_user_result": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  }
+}
