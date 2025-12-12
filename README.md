@@ -480,7 +480,9 @@ configureRpcClient(axios.create({ baseURL: "/rpc", timeout: 10_000 }));
 
 ## Generate API code
 
-Default (PascalCase/camelCase):
+### Mode 1: Default (PascalCase/camelCase)
+
+For OpenRPC specs using camelCase/PascalCase naming:
 
 ```bash
 node scripts/generate.mjs --input ./openrpc.json --out ./src/rpc/generated
@@ -488,7 +490,37 @@ node scripts/generate.mjs --input ./openrpc.json --out ./src/rpc/generated
 #    getUserByIdQueryOptions, getUserByIdMutationOptions
 ```
 
-Snake‑case mode (identifiers preserved in snake_case):
+### Mode 2: Snake‑case input with automatic conversion (recommended)
+
+When your OpenRPC spec uses snake_case naming (methods like `get_user_by_id`, properties like `user_id`),
+**omit the `--use-snake-case` flag** to automatically convert all identifiers to camelCase/PascalCase in the generated code:
+
+```bash
+node scripts/generate.mjs --input ./openrpc_snake.json --out ./src/rpc/generated
+# OpenRPC method "get_user_by_id" with params { user_id: number } ->
+#   Generated: api.getUserById({ userId: number })
+#   Types: GetUserByIdParams, GetUserByIdResult
+#   Options: getUserByIdQueryOptions, getUserByIdMutationOptions
+#
+# ✅ All client code uses camelCase/PascalCase
+# ✅ Automatic bidirectional mapping: client (camelCase) ↔ server (snake_case)
+# ✅ Request params transformed: { userId: 1 } → { user_id: 1 }
+# ✅ Response data transformed: { user_name: "Ada" } → { userName: "Ada" }
+```
+
+The generator automatically:
+
+- Converts method names: `get_user_by_id` → `getUserById`
+- Converts type names: `user`, `get_users_result` → `User`, `GetUsersResult`
+- Converts property names: `user_id`, `user_name` → `userId`, `userName`
+- Generates transformation code to map between client-side camelCase and server-side snake_case
+- Preserves original snake_case method names in JSON-RPC wire calls
+
+**Your client code will never contain snake_case identifiers**, ensuring consistent TypeScript/JavaScript conventions.
+
+### Mode 3: Snake‑case mode (preserve snake_case identifiers)
+
+Use `--use-snake-case` flag to preserve snake_case identifiers in the generated code:
 
 ```bash
 node scripts/generate.mjs --input ./openrpc_snake.json --out ./src/rpc/generated --use-snake-case
@@ -496,6 +528,8 @@ node scripts/generate.mjs --input ./openrpc_snake.json --out ./src/rpc/generated
 #   api.update_user
 #   update_user_params, update_user_result
 #   update_user_query_options, update_user_mutation_options
+#
+# No transformation applied; identifiers match OpenRPC spec exactly
 ```
 
 Options generation (per project):
@@ -550,6 +584,23 @@ export function UserDetail({ id }: { id: number }) {
 }
 ```
 
+**Note:** If your OpenRPC spec uses snake_case (e.g., method `get_user_by_id`, param `user_id`),
+and you generated **without** `--use-snake-case`, the example becomes:
+
+```tsx
+// OpenRPC: method "get_user_by_id" with param "user_id"
+// Generated client automatically converts to camelCase:
+const q = useQuery(
+  getUserByIdQueryOptions({
+    params: { userId: id }, // ✅ camelCase in client code
+    query: { staleTime: 10_000 },
+  })
+);
+
+// Response properties also converted: user_name → userName
+return <div>{q.data.data.userName}</div>;
+```
+
 ### Mutation example (with `mutationKey`)
 
 ```tsx
@@ -572,6 +623,26 @@ export function CreateUserButton() {
 
 > The generated mutation options include `mutationKey: ["createUser"]`. You can rely on this for cache scoping or custom mutation behaviors.
 
+**Note:** If your OpenRPC spec uses snake_case (e.g., method `create_user`, params `user_name`, `user_email`),
+and you generated **without** `--use-snake-case`, the example becomes:
+
+```tsx
+// OpenRPC: method "create_user" with params "user_name", "user_email"
+// Generated client automatically converts to camelCase:
+const m = useMutation(
+  createUserMutationOptions({
+    mutation: { retry: 0 },
+  })
+);
+
+// ✅ Use camelCase in client code; transformed to snake_case for server
+return (
+  <button onClick={() => m.mutate({ userName: "Ada", userEmail: "ada@example.com" })}>
+    Create
+  </button>
+);
+```
+
 ### Per‑call Axios override
 
 ```ts
@@ -587,6 +658,12 @@ await api.getUsers({}, { timeout: 4000 });
 
 - One **Params** and one **Result** per method, named strictly by method:
   `PascalCase(method) + "Params"` and `PascalCase(method) + "Result"`.
+- **Automatic snake_case conversion**: When input uses snake_case naming and `--use-snake-case` is omitted:
+  - Method names: `get_user_by_id` → `getUserById`
+  - Type names: `user`, `get_users_result` → `User`, `GetUsersResult`
+  - Properties: `user_id`, `user_name` → `userId`, `userName`
+  - Original snake_case names preserved in JSON-RPC wire calls
+  - Bidirectional transformation: client (camelCase) ↔ server (snake_case)
 - If the OpenRPC result `$ref` name equals the method‑named `Result`, **no alias** is emitted.
   If it differs, the generator emits a single alias:
 
