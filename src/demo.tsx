@@ -1,6 +1,5 @@
 import axios from "axios";
 import { configureRpcClient } from "./rpc/base";
-import { api } from "./rpc/generated";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   createUserMutationOptions,
@@ -8,7 +7,8 @@ import {
   getUserByIdQueryOptions,
   getUsersQueryOptions,
   updateUserMutationOptions,
-} from "./rpc";
+  // } from "./rpc/generated-users-api";
+} from "./rpc/generated-users-api-snake-case-converted";
 
 const axiosInstance = axios.create({
   baseURL: "https://api.example.com/rpc",
@@ -86,14 +86,18 @@ export const useDeleteUserMutation = (
 const getUsersQuery = useGetUsersQuery();
 getUsersQuery.refetch();
 
-const getUserByIdQuery = useGetUserByIdQuery({ params: { id: 1234 } });
+const getUserByIdQuery = useGetUserByIdQuery({ params: { userId: 1234 } });
 getUserByIdQuery.refetch();
 
 const createUserMutation = useCreateUserMutation();
-createUserMutation.mutate({ name: "Alice", email: "alice@example.com" });
+createUserMutation.mutate({ userName: "Alice", userEmail: "alice@example.com" });
 
 const updateUserMutation = useUpdateUserMutation();
-updateUserMutation.mutate({ id: 1234, name: "Alice Smith" });
+updateUserMutation.mutate({
+  userId: 1234,
+  userName: "Alice Smith",
+  userEmail: "alice.smith@example.com",
+});
 
 const deleteUserMutation = useDeleteUserMutation();
-deleteUserMutation.mutate({ id: 1234 });
+deleteUserMutation.mutate({ userId: 1234 });
