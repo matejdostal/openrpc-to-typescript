@@ -1,2 +1,2 @@
 export * from "./base";
-export * from "./generated";
+// export * from "./generated";
