@@ -29,7 +29,7 @@ const inputPath = resolve(process.cwd(), args.input || args.i || "./openrpc.json
 const outDir = resolve(process.cwd(), args.out || args.o || "./src/rpc/generated");
 const configPath = resolve(
   process.cwd(),
-  args.config || args.c || "./openrpc-generator.config.json"
+  args.config || args.c || "./.openrpc-generator.config.json"
 );
 const USE_SNAKE =
   !!args["use-snake-case"] && String(args["use-snake-case"]).toLowerCase() !== "false";
@@ -130,9 +130,7 @@ const QFN = (m) => (USE_SNAKE ? `${snakeIdent(m)}_query_options` : `${safeFnIden
 const MFN = (m) =>
   USE_SNAKE ? `${snakeIdent(m)}_mutation_options` : `${safeFnIdent(m)}MutationOptions`;
 const normalizePrefixes = (vals) =>
-  (vals ?? [])
-    .map((v) => String(v).trim().toLowerCase())
-    .filter((v) => v.length > 0);
+  (vals ?? []).map((v) => String(v).trim().toLowerCase()).filter((v) => v.length > 0);
 
 function parsePrefixList(val) {
   if (val === undefined || val === null) return null;
@@ -239,11 +237,7 @@ async function main() {
 
   await writeFile(join(outDir, "types.ts"), emitTypesTs(schemas, spec.methods), "utf8");
   await writeFile(join(outDir, "api.ts"), emitApiTs(spec.methods), "utf8");
-  await writeFile(
-    join(outDir, "options.ts"),
-    emitOptionsTs(spec.methods, optionsConfig),
-    "utf8"
-  );
+  await writeFile(join(outDir, "options.ts"), emitOptionsTs(spec.methods, optionsConfig), "utf8");
   await writeFile(join(outDir, "index.ts"), emitIndexTs(), "utf8");
 }
 
@@ -335,9 +329,7 @@ function emitOptionsTs(methods, optionsConfig) {
 
   lines.push(header("options.ts"));
   if (reactQueryImports.length) {
-    lines.push(
-      `import type { ${reactQueryImports.join(", ")} } from "@tanstack/react-query";`
-    );
+    lines.push(`import type { ${reactQueryImports.join(", ")} } from "@tanstack/react-query";`);
   }
   lines.push(`import { api } from "./api";`);
   if (baseFactoryImports.length) {

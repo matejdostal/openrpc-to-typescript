@@ -501,7 +501,7 @@ node scripts/generate.mjs --input ./openrpc_snake.json --out ./src/rpc/generated
 Options generation (per project):
 
 - Default prefixes: `["get", "list"]` -> query‑only; `["create", "update", "delete"]` -> mutation‑only; others emit both.
-- Config file (auto‑discovered): `openrpc-generator.config.json`
+- Config file (auto‑discovered): `.openrpc-generator.config.json`
 
   ```json
   {
