@@ -459,9 +459,16 @@ function emitOptionsTs(methods, optionsConfig) {
   }));
   const hasQueries = methodOptions.some((m) => m.emitQuery);
   const hasMutations = methodOptions.some((m) => m.emitMutation);
+  const reactQueryTypesImports = [];
   const reactQueryImports = [];
-  if (hasQueries) reactQueryImports.push("UseQueryOptions");
-  if (hasMutations) reactQueryImports.push("UseMutationOptions");
+  if (hasQueries) {
+    reactQueryTypesImports.push("UseQueryOptions");
+    reactQueryImports.push("queryOptions");
+  }
+  if (hasMutations) {
+    reactQueryTypesImports.push("UseMutationOptions");
+    reactQueryImports.push("mutationOptions");
+  }
   const baseFactoryImports = [];
   if (hasQueries) baseFactoryImports.push("QueryOptionsFactory");
   if (hasMutations) baseFactoryImports.push("MutationOptionsFactory");
@@ -469,8 +476,13 @@ function emitOptionsTs(methods, optionsConfig) {
   const lines = [];
 
   lines.push(header("options.ts"));
+  if (reactQueryTypesImports.length) {
+    lines.push(
+      `import type { ${reactQueryTypesImports.join(", ")} } from "@tanstack/react-query";`
+    );
+  }
   if (reactQueryImports.length) {
-    lines.push(`import type { ${reactQueryImports.join(", ")} } from "@tanstack/react-query";`);
+    lines.push(`import { ${reactQueryImports.join(", ")} } from "@tanstack/react-query";`);
   }
   lines.push(`import { api } from "./api";`);
   if (baseFactoryImports.length) {
@@ -484,11 +496,11 @@ function emitOptionsTs(methods, optionsConfig) {
         `export function ${m.qName}(
   opts: QueryOptionsFactory<${m.params}, ${m.result}>
 ) {
-  return {
+  return queryOptions({
     queryKey: [${JSON.stringify(m.method.name)}, opts.params] as const,
     queryFn: () => api.${m.ident}(opts.params, opts.axios),
     ...(opts.query ?? {}),
-  } satisfies UseQueryOptions<${m.result}, unknown, ${m.result}, readonly unknown[]>;
+  } satisfies UseQueryOptions<${m.result}, unknown, ${m.result}, readonly unknown[]>);
 }
 `
       );
@@ -499,11 +511,11 @@ function emitOptionsTs(methods, optionsConfig) {
         `export function ${m.mName}(
   opts: MutationOptionsFactory<${m.params}, ${m.result}>
 ) {
-  return {
+  return mutationOptions({
     mutationKey: [${JSON.stringify(m.method.name)}] as const,
     mutationFn: (params: ${m.params}) => api.${m.ident}(params, opts.axios),
     ...(opts.mutation ?? {}),
-  } satisfies UseMutationOptions<${m.result}, unknown, ${m.params}>;
+  } satisfies UseMutationOptions<${m.result}, unknown, ${m.params}>);
 }
 `
       );
