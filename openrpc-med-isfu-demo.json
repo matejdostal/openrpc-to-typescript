@@ -1,0 +1,688 @@
+{
+  "openrpc": "1.3.2",
+  "info": { "title": "MED ISFU RPC", "version": "0.0.2" },
+  "methods": [
+    {
+      "name": "Login",
+      "params": [
+        { "name": "login", "required": true, "schema": { "type": "string" } },
+        { "name": "pass_hash", "required": true, "schema": { "type": "string" } }
+      ],
+      "result": { "name": "Login_Result", "schema": { "type": "boolean" } }
+    },
+    {
+      "name": "Logout",
+      "params": [],
+      "result": { "name": "Logout_Result", "schema": { "type": "boolean" } }
+    },
+    {
+      "name": "GetSessionStatus",
+      "params": [],
+      "result": {
+        "name": "GetSessionStatus_Result",
+        "schema": { "$ref": "#\/components\/schemas\/SessionStatus" }
+      }
+    },
+    {
+      "name": "RdsBillingTariff_Create",
+      "params": [
+        {
+          "name": "entity",
+          "required": true,
+          "schema": { "$ref": "#\/components\/schemas\/RdsBillingTariff" }
+        }
+      ],
+      "result": {
+        "name": "RdsBillingTariff_Create_Result",
+        "schema": { "$ref": "#\/components\/schemas\/RdsBillingTariff_Update_Result" }
+      }
+    },
+    {
+      "name": "RdsBillingTariff_Update",
+      "params": [
+        {
+          "name": "entity",
+          "required": true,
+          "schema": { "$ref": "#\/components\/schemas\/RdsBillingTariff" }
+        }
+      ],
+      "result": {
+        "name": "RdsBillingTariff_Update_Result",
+        "schema": { "$ref": "#\/components\/schemas\/RdsBillingTariff_Update_Result" }
+      }
+    },
+    {
+      "name": "RdsBillingTariff_Delete",
+      "params": [
+        {
+          "name": "entity",
+          "required": true,
+          "schema": { "$ref": "#\/components\/schemas\/RdsBillingTariff" }
+        }
+      ],
+      "result": {
+        "name": "RdsBillingTariff_Delete_Result",
+        "schema": { "$ref": "#\/components\/schemas\/RdsBillingTariff_Update_Result" }
+      }
+    },
+    {
+      "name": "RdsBillingTariff_GetAll",
+      "params": [],
+      "result": {
+        "name": "RdsBillingTariff_GetAll_Result",
+        "schema": {
+          "type": "array",
+          "items": { "$ref": "#\/components\/schemas\/RdsBillingTariff" }
+        }
+      }
+    },
+    {
+      "name": "Dodavatel_Create",
+      "params": [
+        {
+          "name": "entity",
+          "required": true,
+          "schema": { "$ref": "#\/components\/schemas\/Dodavatel" }
+        }
+      ],
+      "result": {
+        "name": "Dodavatel_Create_Result",
+        "schema": { "$ref": "#\/components\/schemas\/Dodavatel_Update_Result" }
+      }
+    },
+    {
+      "name": "Dodavatel_Update",
+      "params": [
+        {
+          "name": "entity",
+          "required": true,
+          "schema": { "$ref": "#\/components\/schemas\/Dodavatel" }
+        }
+      ],
+      "result": {
+        "name": "Dodavatel_Update_Result",
+        "schema": { "$ref": "#\/components\/schemas\/Dodavatel_Update_Result" }
+      }
+    },
+    {
+      "name": "Dodavatel_Delete",
+      "params": [
+        {
+          "name": "entity",
+          "required": true,
+          "schema": { "$ref": "#\/components\/schemas\/Dodavatel" }
+        }
+      ],
+      "result": {
+        "name": "Dodavatel_Delete_Result",
+        "schema": { "$ref": "#\/components\/schemas\/Dodavatel_Update_Result" }
+      }
+    },
+    {
+      "name": "Dodavatel_GetAll",
+      "params": [],
+      "result": {
+        "name": "Dodavatel_GetAll_Result",
+        "schema": { "type": "array", "items": { "$ref": "#\/components\/schemas\/Dodavatel" } }
+      }
+    },
+    {
+      "name": "InvoiceItem_Create",
+      "params": [
+        {
+          "name": "entity",
+          "required": true,
+          "schema": { "$ref": "#\/components\/schemas\/InvoiceItem" }
+        }
+      ],
+      "result": {
+        "name": "InvoiceItem_Create_Result",
+        "schema": { "$ref": "#\/components\/schemas\/InvoiceItem_Update_Result" }
+      }
+    },
+    {
+      "name": "InvoiceItem_Update",
+      "params": [
+        {
+          "name": "entity",
+          "required": true,
+          "schema": { "$ref": "#\/components\/schemas\/InvoiceItem" }
+        }
+      ],
+      "result": {
+        "name": "InvoiceItem_Update_Result",
+        "schema": { "$ref": "#\/components\/schemas\/InvoiceItem_Update_Result" }
+      }
+    },
+    {
+      "name": "InvoiceItem_Delete",
+      "params": [
+        {
+          "name": "entity",
+          "required": true,
+          "schema": { "$ref": "#\/components\/schemas\/InvoiceItem" }
+        }
+      ],
+      "result": {
+        "name": "InvoiceItem_Delete_Result",
+        "schema": { "$ref": "#\/components\/schemas\/InvoiceItem_Update_Result" }
+      }
+    },
+    {
+      "name": "InvoiceItemRevision_Create",
+      "params": [
+        {
+          "name": "entity",
+          "required": true,
+          "schema": { "$ref": "#\/components\/schemas\/InvoiceItemRevision" }
+        }
+      ],
+      "result": {
+        "name": "InvoiceItemRevision_Create_Result",
+        "schema": { "$ref": "#\/components\/schemas\/InvoiceItemRevision_Update_Result" }
+      }
+    },
+    {
+      "name": "InvoiceItemRevision_Update",
+      "params": [
+        {
+          "name": "entity",
+          "required": true,
+          "schema": { "$ref": "#\/components\/schemas\/InvoiceItemRevision" }
+        }
+      ],
+      "result": {
+        "name": "InvoiceItemRevision_Update_Result",
+        "schema": { "$ref": "#\/components\/schemas\/InvoiceItemRevision_Update_Result" }
+      }
+    },
+    {
+      "name": "InvoiceItemRevision_Delete",
+      "params": [
+        {
+          "name": "entity",
+          "required": true,
+          "schema": { "$ref": "#\/components\/schemas\/InvoiceItemRevision" }
+        }
+      ],
+      "result": {
+        "name": "InvoiceItemRevision_Delete_Result",
+        "schema": { "$ref": "#\/components\/schemas\/InvoiceItemRevision_Update_Result" }
+      }
+    },
+    {
+      "name": "Mds_Create",
+      "params": [
+        { "name": "entity", "required": true, "schema": { "$ref": "#\/components\/schemas\/Mds" } }
+      ],
+      "result": {
+        "name": "Mds_Create_Result",
+        "schema": { "$ref": "#\/components\/schemas\/Mds_Update_Result" }
+      }
+    },
+    {
+      "name": "Mds_Update",
+      "params": [
+        { "name": "entity", "required": true, "schema": { "$ref": "#\/components\/schemas\/Mds" } }
+      ],
+      "result": {
+        "name": "Mds_Update_Result",
+        "schema": { "$ref": "#\/components\/schemas\/Mds_Update_Result" }
+      }
+    },
+    {
+      "name": "Mds_Delete",
+      "params": [
+        { "name": "entity", "required": true, "schema": { "$ref": "#\/components\/schemas\/Mds" } }
+      ],
+      "result": {
+        "name": "Mds_Delete_Result",
+        "schema": { "$ref": "#\/components\/schemas\/Mds_Update_Result" }
+      }
+    },
+    {
+      "name": "Mds_GetAll",
+      "params": [],
+      "result": {
+        "name": "Mds_GetAll_Result",
+        "schema": { "type": "array", "items": { "$ref": "#\/components\/schemas\/Mds" } }
+      }
+    },
+    {
+      "name": "Mds_GetByEic",
+      "params": [
+        { "name": "mdsEic", "required": true, "schema": { "type": "string" } },
+        {
+          "name": "_from",
+          "required": false,
+          "schema": { "type": "string", "format": "date-time" }
+        },
+        { "name": "_to", "required": false, "schema": { "type": "string", "format": "date-time" } }
+      ],
+      "result": {
+        "name": "Mds_GetByEic_Result",
+        "schema": { "$ref": "#\/components\/schemas\/Mds_GetByEic_Result" }
+      }
+    },
+    {
+      "name": "MdsPurgeById",
+      "params": [{ "name": "mdsId", "required": true, "schema": { "type": "string" } }],
+      "result": {
+        "name": "MdsPurgeById_Result",
+        "schema": { "$ref": "#\/components\/schemas\/Result" }
+      }
+    },
+    {
+      "name": "MdsRevision_Create",
+      "params": [
+        {
+          "name": "entity",
+          "required": true,
+          "schema": { "$ref": "#\/components\/schemas\/MdsRevision" }
+        }
+      ],
+      "result": {
+        "name": "MdsRevision_Create_Result",
+        "schema": { "$ref": "#\/components\/schemas\/MdsRevision_Update_Result" }
+      }
+    },
+    {
+      "name": "MdsRevision_Update",
+      "params": [
+        {
+          "name": "entity",
+          "required": true,
+          "schema": { "$ref": "#\/components\/schemas\/MdsRevision" }
+        }
+      ],
+      "result": {
+        "name": "MdsRevision_Update_Result",
+        "schema": { "$ref": "#\/components\/schemas\/MdsRevision_Update_Result" }
+      }
+    },
+    {
+      "name": "MdsRevision_Delete",
+      "params": [
+        {
+          "name": "entity",
+          "required": true,
+          "schema": { "$ref": "#\/components\/schemas\/MdsRevision" }
+        }
+      ],
+      "result": {
+        "name": "MdsRevision_Delete_Result",
+        "schema": { "$ref": "#\/components\/schemas\/MdsRevision_Update_Result" }
+      }
+    },
+    {
+      "name": "Oom_Create",
+      "params": [
+        { "name": "entity", "required": true, "schema": { "$ref": "#\/components\/schemas\/Oom" } }
+      ],
+      "result": {
+        "name": "Oom_Create_Result",
+        "schema": { "$ref": "#\/components\/schemas\/Oom_Update_Result" }
+      }
+    },
+    {
+      "name": "Oom_Update",
+      "params": [
+        { "name": "entity", "required": true, "schema": { "$ref": "#\/components\/schemas\/Oom" } }
+      ],
+      "result": {
+        "name": "Oom_Update_Result",
+        "schema": { "$ref": "#\/components\/schemas\/Oom_Update_Result" }
+      }
+    },
+    {
+      "name": "Oom_Delete",
+      "params": [
+        { "name": "entity", "required": true, "schema": { "$ref": "#\/components\/schemas\/Oom" } }
+      ],
+      "result": {
+        "name": "Oom_Delete_Result",
+        "schema": { "$ref": "#\/components\/schemas\/Oom_Update_Result" }
+      }
+    },
+    {
+      "name": "OomGetByEic",
+      "params": [
+        { "name": "oomEic", "required": true, "schema": { "type": "string" } },
+        {
+          "name": "_from",
+          "required": false,
+          "schema": { "type": "string", "format": "date-time" }
+        },
+        { "name": "_to", "required": false, "schema": { "type": "string", "format": "date-time" } }
+      ],
+      "result": {
+        "name": "OomGetByEic_Result",
+        "schema": { "$ref": "#\/components\/schemas\/Oom_QueryResult" }
+      }
+    },
+    {
+      "name": "OomGetByMdsId",
+      "params": [
+        { "name": "mdsId", "required": true, "schema": { "type": "string" } },
+        {
+          "name": "_from",
+          "required": false,
+          "schema": { "type": "string", "format": "date-time" }
+        },
+        { "name": "_to", "required": false, "schema": { "type": "string", "format": "date-time" } }
+      ],
+      "result": {
+        "name": "OomGetByMdsId_Result",
+        "schema": {
+          "type": "array",
+          "items": { "$ref": "#\/components\/schemas\/Oom_QueryResult" }
+        }
+      }
+    },
+    {
+      "name": "OomRevision_InsertNewRevision",
+      "params": [
+        { "name": "mdsId", "required": true, "schema": { "type": "string" } },
+        { "name": "oomId", "required": true, "schema": { "type": "string" } },
+        {
+          "name": "entity",
+          "required": true,
+          "schema": { "$ref": "#\/components\/schemas\/OomRevision" }
+        }
+      ],
+      "result": {
+        "name": "OomRevision_InsertNewRevision_Result",
+        "schema": { "$ref": "#\/components\/schemas\/OomRevision_InsertNewRevision_Result" }
+      }
+    },
+    {
+      "name": "OomRevision_Create",
+      "params": [
+        {
+          "name": "entity",
+          "required": true,
+          "schema": { "$ref": "#\/components\/schemas\/OomRevision" }
+        }
+      ],
+      "result": {
+        "name": "OomRevision_Create_Result",
+        "schema": { "$ref": "#\/components\/schemas\/OomRevision_Update_Result" }
+      }
+    },
+    {
+      "name": "OomRevision_Update",
+      "params": [
+        {
+          "name": "entity",
+          "required": true,
+          "schema": { "$ref": "#\/components\/schemas\/OomRevision" }
+        }
+      ],
+      "result": {
+        "name": "OomRevision_Update_Result",
+        "schema": { "$ref": "#\/components\/schemas\/OomRevision_Update_Result" }
+      }
+    },
+    {
+      "name": "OomRevision_Delete",
+      "params": [
+        {
+          "name": "entity",
+          "required": true,
+          "schema": { "$ref": "#\/components\/schemas\/OomRevision" }
+        }
+      ],
+      "result": {
+        "name": "OomRevision_Delete_Result",
+        "schema": { "$ref": "#\/components\/schemas\/OomRevision_Update_Result" }
+      }
+    }
+  ],
+  "components": {
+    "schemas": {
+      "SessionStatus": {
+        "type": "object",
+        "description": "isfu.service.IsfuServiceImpl.GetSessionStatus.SessionStatus",
+        "properties": { "valid": { "type": "boolean" }, "userId": { "type": "string" } }
+      },
+      "RdsBillingTariff": {
+        "type": "object",
+        "description": "isfu.entity.RdsBillingTariff",
+        "additionalProperties": true,
+        "note": "Additional properties allowed.",
+        "properties": {
+          "Id": { "type": "string" },
+          "Identifier": { "type": "string" },
+          "ValidFrom": { "type": "string", "format": "date-time" },
+          "ValidTo": { "type": "string", "format": "date-time" },
+          "Name": { "type": "string" },
+          "CreationDate": { "type": "string", "format": "date-time" },
+          "LastModification": { "type": "string", "format": "date-time" },
+          "DeletationDate": { "type": ["string", "null"], "format": "date-time" }
+        }
+      },
+      "RdsBillingTariff_Update_Result": {
+        "type": "object",
+        "description": "isfu.service.IsfuServiceImpl.RdsBillingTariff_Update_Result",
+        "properties": {
+          "success": { "type": "boolean" },
+          "entity": { "$ref": "#\/components\/schemas\/RdsBillingTariff" }
+        }
+      },
+      "Dodavatel": {
+        "type": "object",
+        "description": "isfu.entity.Dodavatel",
+        "additionalProperties": true,
+        "note": "Additional properties allowed.",
+        "properties": {
+          "Id": { "type": "string" },
+          "Name": { "type": "string" },
+          "Eic": { "type": "string" },
+          "CreationDate": { "type": "string", "format": "date-time" },
+          "LastModification": { "type": "string", "format": "date-time" },
+          "DeletationDate": { "type": ["string", "null"], "format": "date-time" }
+        }
+      },
+      "Dodavatel_Update_Result": {
+        "type": "object",
+        "description": "isfu.service.IsfuServiceImpl.Dodavatel_Update_Result",
+        "properties": {
+          "success": { "type": "boolean" },
+          "entity": { "$ref": "#\/components\/schemas\/Dodavatel" }
+        }
+      },
+      "InvoiceItem": {
+        "type": "object",
+        "description": "isfu.entity.InvoiceItem",
+        "additionalProperties": true,
+        "note": "Additional properties allowed.",
+        "properties": {
+          "Id": { "type": "string" },
+          "RdsBillingTariffId": { "type": "string" },
+          "MdsId": { "type": "string" },
+          "InvoiceItemType": { "type": "string" },
+          "CreationDate": { "type": "string", "format": "date-time" },
+          "LastModification": { "type": "string", "format": "date-time" },
+          "DeletationDate": { "type": ["string", "null"], "format": "date-time" }
+        }
+      },
+      "InvoiceItem_Update_Result": {
+        "type": "object",
+        "description": "isfu.service.IsfuServiceImpl.InvoiceItem_Update_Result",
+        "properties": {
+          "success": { "type": "boolean" },
+          "entity": { "$ref": "#\/components\/schemas\/InvoiceItem" }
+        }
+      },
+      "InvoiceItemRevision": {
+        "type": "object",
+        "description": "isfu.entity.InvoiceItemRevision",
+        "additionalProperties": true,
+        "note": "Additional properties allowed.",
+        "properties": {
+          "Id": { "type": "string" },
+          "ValidFrom": { "type": "string", "format": "date-time" },
+          "ValidTo": { "type": "string", "format": "date-time" },
+          "RevisionReasonTags": { "type": "string" },
+          "ReferenceId": { "type": "string" },
+          "CreationDate": { "type": "string", "format": "date-time" },
+          "LastModification": { "type": "string", "format": "date-time" },
+          "DeletationDate": { "type": ["string", "null"], "format": "date-time" }
+        }
+      },
+      "InvoiceItemRevision_Update_Result": {
+        "type": "object",
+        "description": "isfu.service.IsfuServiceImpl.InvoiceItemRevision_Update_Result",
+        "properties": {
+          "success": { "type": "boolean" },
+          "entity": { "$ref": "#\/components\/schemas\/InvoiceItemRevision" }
+        }
+      },
+      "Mds": {
+        "type": "object",
+        "description": "isfu.entity.Mds",
+        "additionalProperties": true,
+        "note": "Additional properties allowed.",
+        "properties": {
+          "Id": { "type": "string" },
+          "Name": { "type": "string" },
+          "Eic": { "type": "string" },
+          "CreationDate": { "type": "string", "format": "date-time" },
+          "LastModification": { "type": "string", "format": "date-time" },
+          "DeletationDate": { "type": ["string", "null"], "format": "date-time" }
+        }
+      },
+      "Mds_Update_Result": {
+        "type": "object",
+        "description": "isfu.service.IsfuServiceImpl.Mds_Update_Result",
+        "properties": {
+          "success": { "type": "boolean" },
+          "entity": { "$ref": "#\/components\/schemas\/Mds" }
+        }
+      },
+      "MdsRevision": {
+        "type": "object",
+        "description": "isfu.entity.MdsRevision",
+        "additionalProperties": true,
+        "note": "Additional properties allowed.",
+        "properties": {
+          "Id": { "type": "string" },
+          "ReferenceId": { "type": "string" },
+          "ValidFrom": { "type": "string", "format": "date-time" },
+          "ValidTo": { "type": "string", "format": "date-time" },
+          "RevisionReasonTags": { "type": "string" },
+          "CreationDate": { "type": "string", "format": "date-time" },
+          "LastModification": { "type": "string", "format": "date-time" },
+          "DeletationDate": { "type": ["string", "null"], "format": "date-time" }
+        }
+      },
+      "Mds_GetByEic_Result": {
+        "type": "object",
+        "description": "isfu.service.IsfuServiceImpl.Mds_GetByEic.Mds_GetByEic_Result",
+        "properties": {
+          "mds": { "$ref": "#\/components\/schemas\/Mds" },
+          "requestFrom": { "type": "string", "format": "date-time" },
+          "requestTo": { "type": "string", "format": "date-time" },
+          "revisions": {
+            "type": "array",
+            "items": { "$ref": "#\/components\/schemas\/MdsRevision" }
+          }
+        }
+      },
+      "Result": {
+        "type": "object",
+        "description": "isfu.service.IsfuServiceImpl.MdsPurgeById.Result",
+        "properties": {
+          "mdsId": { "type": "string" },
+          "numberOfMdsPurged": { "type": "integer" },
+          "numberOfMdsRevisionPurged": { "type": "integer" }
+        }
+      },
+      "MdsRevision_Update_Result": {
+        "type": "object",
+        "description": "isfu.service.IsfuServiceImpl.MdsRevision_Update_Result",
+        "properties": {
+          "success": { "type": "boolean" },
+          "entity": { "$ref": "#\/components\/schemas\/MdsRevision" }
+        }
+      },
+      "Oom": {
+        "type": "object",
+        "description": "isfu.entity.Oom",
+        "additionalProperties": true,
+        "note": "Additional properties allowed.",
+        "properties": {
+          "Id": { "type": "string" },
+          "Eic": { "type": "string" },
+          "CreationDate": { "type": "string", "format": "date-time" },
+          "LastModification": { "type": "string", "format": "date-time" },
+          "DeletationDate": { "type": ["string", "null"], "format": "date-time" }
+        }
+      },
+      "Oom_Update_Result": {
+        "type": "object",
+        "description": "isfu.service.IsfuServiceImpl.Oom_Update_Result",
+        "properties": {
+          "success": { "type": "boolean" },
+          "entity": { "$ref": "#\/components\/schemas\/Oom" }
+        }
+      },
+      "OomRevision": {
+        "type": "object",
+        "description": "isfu.entity.OomRevision",
+        "additionalProperties": true,
+        "note": "Additional properties allowed.",
+        "properties": {
+          "Id": { "type": "string" },
+          "ReferenceId": { "type": "string" },
+          "MdsReferenceId": { "type": ["string", "null"] },
+          "OdberatelReferenceId": { "type": ["string", "null"] },
+          "DodavatelReferenceId": { "type": ["string", "null"] },
+          "ValidFrom": { "type": "string", "format": "date-time" },
+          "ValidTo": { "type": "string", "format": "date-time" },
+          "Name": { "type": "string" },
+          "MedMeteringPointIdentifiers": { "type": "string" },
+          "RevisionReasonTags": { "type": "string" },
+          "CreationDate": { "type": "string", "format": "date-time" },
+          "LastModification": { "type": "string", "format": "date-time" },
+          "DeletationDate": { "type": ["string", "null"], "format": "date-time" }
+        }
+      },
+      "Oom_QueryResult": {
+        "type": "object",
+        "description": "isfu.service.IsfuServiceImpl.Oom_QueryResult",
+        "properties": {
+          "oom": { "$ref": "#\/components\/schemas\/Oom" },
+          "revisionsFrom": { "type": "string", "format": "date-time" },
+          "revisionsTo": { "type": "string", "format": "date-time" },
+          "revisions": {
+            "type": "array",
+            "items": { "$ref": "#\/components\/schemas\/OomRevision" }
+          }
+        }
+      },
+      "OomRevision_InsertNewRevision_Result": {
+        "type": "object",
+        "description": "isfu.service.IsfuServiceImpl.OomRevision_InsertNewRevision_Result",
+        "properties": {
+          "success": { "type": "boolean" },
+          "oom": { "$ref": "#\/components\/schemas\/Oom" },
+          "revisions": {
+            "type": "array",
+            "items": { "$ref": "#\/components\/schemas\/OomRevision" }
+          },
+          "updatedIds": { "type": "array", "items": { "type": "string" } },
+          "createdId": { "type": "string" }
+        }
+      },
+      "OomRevision_Update_Result": {
+        "type": "object",
+        "description": "isfu.service.IsfuServiceImpl.OomRevision_Update_Result",
+        "properties": {
+          "success": { "type": "boolean" },
+          "entity": { "$ref": "#\/components\/schemas\/OomRevision" }
+        }
+      }
+    }
+  }
+}

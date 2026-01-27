@@ -282,6 +282,8 @@ function schemaToTs(s, schemas, convertSnakeToCamel = false) {
       });
       return rows.length ? `{\n${rows.join("\n")}\n}` : "{}";
     }
+    case "null":
+      return "null";
     default:
       return "unknown";
   }

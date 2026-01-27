@@ -1,0 +1,43 @@
+/* AUTO-GENERATED: api.ts — do not edit by hand. */
+
+import type { AxiosRequestConfig } from "axios";
+import { getRpcClient } from "../base";
+import type { Login_params, Login_result, Logout_params, Logout_result, GetSessionStatus_params, GetSessionStatus_result, RdsBillingTariff_Create_params, RdsBillingTariff_Create_result, RdsBillingTariff_Update_params, RdsBillingTariff_Update_result, RdsBillingTariff_Delete_params, RdsBillingTariff_Delete_result, RdsBillingTariff_GetAll_params, RdsBillingTariff_GetAll_result, Dodavatel_Create_params, Dodavatel_Create_result, Dodavatel_Update_params, Dodavatel_Update_result, Dodavatel_Delete_params, Dodavatel_Delete_result, Dodavatel_GetAll_params, Dodavatel_GetAll_result, InvoiceItem_Create_params, InvoiceItem_Create_result, InvoiceItem_Update_params, InvoiceItem_Update_result, InvoiceItem_Delete_params, InvoiceItem_Delete_result, InvoiceItemRevision_Create_params, InvoiceItemRevision_Create_result, InvoiceItemRevision_Update_params, InvoiceItemRevision_Update_result, InvoiceItemRevision_Delete_params, InvoiceItemRevision_Delete_result, Mds_Create_params, Mds_Create_result, Mds_Update_params, Mds_Update_result, Mds_Delete_params, Mds_Delete_result, Mds_GetAll_params, Mds_GetAll_result, Mds_GetByEic_params, Mds_GetByEic_result, MdsPurgeById_params, MdsPurgeById_result, MdsRevision_Create_params, MdsRevision_Create_result, MdsRevision_Update_params, MdsRevision_Update_result, MdsRevision_Delete_params, MdsRevision_Delete_result, Oom_Create_params, Oom_Create_result, Oom_Update_params, Oom_Update_result, Oom_Delete_params, Oom_Delete_result, OomGetByEic_params, OomGetByEic_result, OomGetByMdsId_params, OomGetByMdsId_result, OomRevision_InsertNewRevision_params, OomRevision_InsertNewRevision_result, OomRevision_Create_params, OomRevision_Create_result, OomRevision_Update_params, OomRevision_Update_result, OomRevision_Delete_params, OomRevision_Delete_result } from "./types";
+
+export const api = {
+  Login: (params: Login_params, axios?: AxiosRequestConfig) => getRpcClient().call<Login_params, Login_result>("Login", params, axios),
+  Logout: (params: Logout_params, axios?: AxiosRequestConfig) => getRpcClient().call<Logout_params, Logout_result>("Logout", params, axios),
+  GetSessionStatus: (params: GetSessionStatus_params, axios?: AxiosRequestConfig) => getRpcClient().call<GetSessionStatus_params, GetSessionStatus_result>("GetSessionStatus", params, axios),
+  RdsBillingTariff_Create: (params: RdsBillingTariff_Create_params, axios?: AxiosRequestConfig) => getRpcClient().call<RdsBillingTariff_Create_params, RdsBillingTariff_Create_result>("RdsBillingTariff_Create", params, axios),
+  RdsBillingTariff_Update: (params: RdsBillingTariff_Update_params, axios?: AxiosRequestConfig) => getRpcClient().call<RdsBillingTariff_Update_params, RdsBillingTariff_Update_result>("RdsBillingTariff_Update", params, axios),
+  RdsBillingTariff_Delete: (params: RdsBillingTariff_Delete_params, axios?: AxiosRequestConfig) => getRpcClient().call<RdsBillingTariff_Delete_params, RdsBillingTariff_Delete_result>("RdsBillingTariff_Delete", params, axios),
+  RdsBillingTariff_GetAll: (params: RdsBillingTariff_GetAll_params, axios?: AxiosRequestConfig) => getRpcClient().call<RdsBillingTariff_GetAll_params, RdsBillingTariff_GetAll_result>("RdsBillingTariff_GetAll", params, axios),
+  Dodavatel_Create: (params: Dodavatel_Create_params, axios?: AxiosRequestConfig) => getRpcClient().call<Dodavatel_Create_params, Dodavatel_Create_result>("Dodavatel_Create", params, axios),
+  Dodavatel_Update: (params: Dodavatel_Update_params, axios?: AxiosRequestConfig) => getRpcClient().call<Dodavatel_Update_params, Dodavatel_Update_result>("Dodavatel_Update", params, axios),
+  Dodavatel_Delete: (params: Dodavatel_Delete_params, axios?: AxiosRequestConfig) => getRpcClient().call<Dodavatel_Delete_params, Dodavatel_Delete_result>("Dodavatel_Delete", params, axios),
+  Dodavatel_GetAll: (params: Dodavatel_GetAll_params, axios?: AxiosRequestConfig) => getRpcClient().call<Dodavatel_GetAll_params, Dodavatel_GetAll_result>("Dodavatel_GetAll", params, axios),
+  InvoiceItem_Create: (params: InvoiceItem_Create_params, axios?: AxiosRequestConfig) => getRpcClient().call<InvoiceItem_Create_params, InvoiceItem_Create_result>("InvoiceItem_Create", params, axios),
+  InvoiceItem_Update: (params: InvoiceItem_Update_params, axios?: AxiosRequestConfig) => getRpcClient().call<InvoiceItem_Update_params, InvoiceItem_Update_result>("InvoiceItem_Update", params, axios),
+  InvoiceItem_Delete: (params: InvoiceItem_Delete_params, axios?: AxiosRequestConfig) => getRpcClient().call<InvoiceItem_Delete_params, InvoiceItem_Delete_result>("InvoiceItem_Delete", params, axios),
+  InvoiceItemRevision_Create: (params: InvoiceItemRevision_Create_params, axios?: AxiosRequestConfig) => getRpcClient().call<InvoiceItemRevision_Create_params, InvoiceItemRevision_Create_result>("InvoiceItemRevision_Create", params, axios),
+  InvoiceItemRevision_Update: (params: InvoiceItemRevision_Update_params, axios?: AxiosRequestConfig) => getRpcClient().call<InvoiceItemRevision_Update_params, InvoiceItemRevision_Update_result>("InvoiceItemRevision_Update", params, axios),
+  InvoiceItemRevision_Delete: (params: InvoiceItemRevision_Delete_params, axios?: AxiosRequestConfig) => getRpcClient().call<InvoiceItemRevision_Delete_params, InvoiceItemRevision_Delete_result>("InvoiceItemRevision_Delete", params, axios),
+  Mds_Create: (params: Mds_Create_params, axios?: AxiosRequestConfig) => getRpcClient().call<Mds_Create_params, Mds_Create_result>("Mds_Create", params, axios),
+  Mds_Update: (params: Mds_Update_params, axios?: AxiosRequestConfig) => getRpcClient().call<Mds_Update_params, Mds_Update_result>("Mds_Update", params, axios),
+  Mds_Delete: (params: Mds_Delete_params, axios?: AxiosRequestConfig) => getRpcClient().call<Mds_Delete_params, Mds_Delete_result>("Mds_Delete", params, axios),
+  Mds_GetAll: (params: Mds_GetAll_params, axios?: AxiosRequestConfig) => getRpcClient().call<Mds_GetAll_params, Mds_GetAll_result>("Mds_GetAll", params, axios),
+  Mds_GetByEic: (params: Mds_GetByEic_params, axios?: AxiosRequestConfig) => getRpcClient().call<Mds_GetByEic_params, Mds_GetByEic_result>("Mds_GetByEic", params, axios),
+  MdsPurgeById: (params: MdsPurgeById_params, axios?: AxiosRequestConfig) => getRpcClient().call<MdsPurgeById_params, MdsPurgeById_result>("MdsPurgeById", params, axios),
+  MdsRevision_Create: (params: MdsRevision_Create_params, axios?: AxiosRequestConfig) => getRpcClient().call<MdsRevision_Create_params, MdsRevision_Create_result>("MdsRevision_Create", params, axios),
+  MdsRevision_Update: (params: MdsRevision_Update_params, axios?: AxiosRequestConfig) => getRpcClient().call<MdsRevision_Update_params, MdsRevision_Update_result>("MdsRevision_Update", params, axios),
+  MdsRevision_Delete: (params: MdsRevision_Delete_params, axios?: AxiosRequestConfig) => getRpcClient().call<MdsRevision_Delete_params, MdsRevision_Delete_result>("MdsRevision_Delete", params, axios),
+  Oom_Create: (params: Oom_Create_params, axios?: AxiosRequestConfig) => getRpcClient().call<Oom_Create_params, Oom_Create_result>("Oom_Create", params, axios),
+  Oom_Update: (params: Oom_Update_params, axios?: AxiosRequestConfig) => getRpcClient().call<Oom_Update_params, Oom_Update_result>("Oom_Update", params, axios),
+  Oom_Delete: (params: Oom_Delete_params, axios?: AxiosRequestConfig) => getRpcClient().call<Oom_Delete_params, Oom_Delete_result>("Oom_Delete", params, axios),
+  OomGetByEic: (params: OomGetByEic_params, axios?: AxiosRequestConfig) => getRpcClient().call<OomGetByEic_params, OomGetByEic_result>("OomGetByEic", params, axios),
+  OomGetByMdsId: (params: OomGetByMdsId_params, axios?: AxiosRequestConfig) => getRpcClient().call<OomGetByMdsId_params, OomGetByMdsId_result>("OomGetByMdsId", params, axios),
+  OomRevision_InsertNewRevision: (params: OomRevision_InsertNewRevision_params, axios?: AxiosRequestConfig) => getRpcClient().call<OomRevision_InsertNewRevision_params, OomRevision_InsertNewRevision_result>("OomRevision_InsertNewRevision", params, axios),
+  OomRevision_Create: (params: OomRevision_Create_params, axios?: AxiosRequestConfig) => getRpcClient().call<OomRevision_Create_params, OomRevision_Create_result>("OomRevision_Create", params, axios),
+  OomRevision_Update: (params: OomRevision_Update_params, axios?: AxiosRequestConfig) => getRpcClient().call<OomRevision_Update_params, OomRevision_Update_result>("OomRevision_Update", params, axios),
+  OomRevision_Delete: (params: OomRevision_Delete_params, axios?: AxiosRequestConfig) => getRpcClient().call<OomRevision_Delete_params, OomRevision_Delete_result>("OomRevision_Delete", params, axios),
+} as const;
