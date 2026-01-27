@@ -33,6 +33,8 @@ const configPath = resolve(
 );
 const USE_SNAKE =
   !!args["use-snake-case"] && String(args["use-snake-case"]).toLowerCase() !== "false";
+const PRESERVE_CASE =
+  !!args["preserve-case"] && String(args["preserve-case"]).toLowerCase() !== "false";
 const DEFAULT_OPTIONS_CONFIG = {
   queryOnlyPrefixes: ["get", "list"],
   mutationOnlyPrefixes: ["create", "update", "delete"],
@@ -160,6 +162,12 @@ function snakeIdent(s) {
   if (RESERVED.has(out)) out = `${out}_`;
   return out;
 }
+function preserveIdent(s) {
+  let out = String(s).replace(/[^A-Za-z0-9_$]/g, "_");
+  if (!/^[A-Za-z_$]/.test(out)) out = `_${out}`;
+  if (RESERVED.has(out)) out = `${out}_`;
+  return out;
+}
 
 /* function identifiers */
 function safeFnIdent(n) {
@@ -182,12 +190,23 @@ const escProp = (n) => (isIdent(n) ? n : JSON.stringify(n));
 
 /* schema refs and type name builders */
 const refName = (ref) => String(ref ?? "").replace(/^#\/components\/schemas\//, "");
-const P = (m) => (USE_SNAKE ? `${snakeIdent(m)}_params` : `${pascal(m)}Params`);
-const R = (m) => (USE_SNAKE ? `${snakeIdent(m)}_result` : `${pascal(m)}Result`);
-const FN = (m) => (USE_SNAKE ? safeSnakeFnIdent(m) : safeFnIdent(m));
-const QFN = (m) => (USE_SNAKE ? `${snakeIdent(m)}_query_options` : `${safeFnIdent(m)}QueryOptions`);
+const P = (m) =>
+  PRESERVE_CASE ? `${preserveIdent(m)}_Params` : USE_SNAKE ? `${snakeIdent(m)}_params` : `${pascal(m)}Params`;
+const R = (m) =>
+  PRESERVE_CASE ? `${preserveIdent(m)}_Result` : USE_SNAKE ? `${snakeIdent(m)}_result` : `${pascal(m)}Result`;
+const FN = (m) => (PRESERVE_CASE ? preserveIdent(m) : USE_SNAKE ? safeSnakeFnIdent(m) : safeFnIdent(m));
+const QFN = (m) =>
+  PRESERVE_CASE
+    ? `${preserveIdent(m)}_QueryOptions`
+    : USE_SNAKE
+      ? `${snakeIdent(m)}_query_options`
+      : `${safeFnIdent(m)}QueryOptions`;
 const MFN = (m) =>
-  USE_SNAKE ? `${snakeIdent(m)}_mutation_options` : `${safeFnIdent(m)}MutationOptions`;
+  PRESERVE_CASE
+    ? `${preserveIdent(m)}_MutationOptions`
+    : USE_SNAKE
+      ? `${snakeIdent(m)}_mutation_options`
+      : `${safeFnIdent(m)}MutationOptions`;
 const normalizePrefixes = (vals) =>
   (vals ?? []).map((v) => String(v).trim().toLowerCase()).filter((v) => v.length > 0);
 
@@ -300,23 +319,32 @@ async function main() {
   if (!Array.isArray(spec?.methods)) throw new Error("Invalid OpenRPC: missing .methods[]");
 
   const schemas = spec?.components?.schemas ?? {};
+  const convertSnakeToCamel = !USE_SNAKE && !PRESERVE_CASE;
   const optionsConfig = await loadOptionsConfig();
   await mkdir(outDir, { recursive: true });
 
-  await writeFile(join(outDir, "types.ts"), emitTypesTs(schemas, spec.methods), "utf8");
-  await writeFile(join(outDir, "api.ts"), emitApiTs(spec.methods, schemas), "utf8");
+  await writeFile(
+    join(outDir, "types.ts"),
+    emitTypesTs(schemas, spec.methods, convertSnakeToCamel),
+    "utf8"
+  );
+  await writeFile(
+    join(outDir, "api.ts"),
+    emitApiTs(spec.methods, schemas, convertSnakeToCamel),
+    "utf8"
+  );
   await writeFile(join(outDir, "options.ts"), emitOptionsTs(spec.methods, optionsConfig), "utf8");
   await writeFile(join(outDir, "index.ts"), emitIndexTs(), "utf8");
 }
 
 /* ---------- Emitters ---------- */
-function emitTypesTs(schemas, methods) {
+function emitTypesTs(schemas, methods, convertSnakeToCamel) {
   const out = [header("types.ts")];
 
   // 1) Component schemas
   for (const [name, sch] of Object.entries(schemas)) {
-    const typeName = !USE_SNAKE && isSnakeCase(name) ? pascal(name) : name;
-    const ts = schemaToTs(sch, schemas, !USE_SNAKE);
+    const typeName = convertSnakeToCamel && isSnakeCase(name) ? pascal(name) : name;
+    const ts = schemaToTs(sch, schemas, convertSnakeToCamel);
     if (sch?.type === "object" && ts.startsWith("{"))
       out.push(`export interface ${typeName} ${ts}\n`);
     else out.push(`export type ${typeName} = ${ts};\n`);
@@ -327,9 +355,9 @@ function emitTypesTs(schemas, methods) {
     const pName = P(m.name);
     const fields = (m.params ?? [])
       .map((p) => {
-        const paramName = !USE_SNAKE && isSnakeCase(p.name) ? camel(p.name) : p.name;
+        const paramName = convertSnakeToCamel && isSnakeCase(p.name) ? camel(p.name) : p.name;
         const opt = p.required ? "" : "?";
-        return `  ${escProp(paramName)}${opt}: ${schemaToTs(p.schema ?? {}, schemas, !USE_SNAKE)};`;
+        return `  ${escProp(paramName)}${opt}: ${schemaToTs(p.schema ?? {}, schemas, convertSnakeToCamel)};`;
       })
       .join("\n");
     out.push(`export interface ${pName} ${fields ? `{\n${fields}\n}` : "{}"}\n`);
@@ -341,10 +369,10 @@ function emitTypesTs(schemas, methods) {
     const rs = m?.result?.schema;
     if (rs?.$ref) {
       const target = refName(rs.$ref);
-      const convertedTarget = !USE_SNAKE && isSnakeCase(target) ? pascal(target) : target;
+      const convertedTarget = convertSnakeToCamel && isSnakeCase(target) ? pascal(target) : target;
       if (convertedTarget !== rName) out.push(`export type ${rName} = ${convertedTarget};\n`); // avoid "type X = X"
     } else if (rs) {
-      const ts = schemaToTs(rs, schemas, !USE_SNAKE);
+      const ts = schemaToTs(rs, schemas, convertSnakeToCamel);
       if (rs.type === "object" && ts.startsWith("{")) out.push(`export interface ${rName} ${ts}\n`);
       else out.push(`export type ${rName} = ${ts};\n`);
     } else {
@@ -355,12 +383,12 @@ function emitTypesTs(schemas, methods) {
   return out.join("\n");
 }
 
-function emitApiTs(methods, schemas) {
+function emitApiTs(methods, schemas, convertSnakeToCamel) {
   const allTypes = Array.from(new Set(methods.flatMap((m) => [P(m.name), R(m.name)])));
 
   // Check if we need transformations
   const needsTransform =
-    !USE_SNAKE &&
+    convertSnakeToCamel &&
     methods.some((m) => {
       const hasSnakeParams = (m.params ?? []).some((p) => isSnakeCase(p.name));
       const resultSchema = m?.result?.schema;
@@ -396,10 +424,10 @@ function emitApiTs(methods, schemas) {
   lines.push(`export const api = {`);
 
   for (const m of methods) {
-    const hasSnakeParams = !USE_SNAKE && (m.params ?? []).some((p) => isSnakeCase(p.name));
+    const hasSnakeParams = convertSnakeToCamel && (m.params ?? []).some((p) => isSnakeCase(p.name));
     const resultSchema = m?.result?.schema;
     const snakeResultProps =
-      !USE_SNAKE && resultSchema ? collectSnakeProps(resultSchema, schemas) : new Set();
+      convertSnakeToCamel && resultSchema ? collectSnakeProps(resultSchema, schemas) : new Set();
     const hasSnakeResult = snakeResultProps.size > 0;
 
     if (hasSnakeParams || hasSnakeResult) {

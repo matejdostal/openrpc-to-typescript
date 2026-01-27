@@ -532,6 +532,21 @@ node scripts/generate.mjs --input ./openrpc_snake.json --out ./src/rpc/generated
 # No transformation applied; identifiers match OpenRPC spec exactly
 ```
 
+### Mode 4: Preserve mixed casing as-is
+
+When your OpenRPC spec uses mixed conventions (e.g., `InvoiceItem_Create`),
+use `--preserve-case` to keep method names, param names, and result attribute names intact:
+
+```bash
+node scripts/generate.mjs --input ./openrpc_mixed.json --out ./src/rpc/generated --preserve-case
+# Example method "InvoiceItem_Create" ->
+#   api.InvoiceItem_Create
+#   InvoiceItem_Create_Params, InvoiceItem_Create_Result
+#   InvoiceItem_Create_QueryOptions, InvoiceItem_Create_MutationOptions
+#
+# No transformation applied; identifiers and payload shapes match OpenRPC spec exactly
+```
+
 Options generation (per project):
 
 - Default prefixes: `["get", "list"]` -> query‑only; `["create", "update", "delete"]` -> mutation‑only; others emit both.
@@ -658,6 +673,8 @@ await api.getUsers({}, { timeout: 4000 });
 
 - One **Params** and one **Result** per method, named strictly by method:
   `PascalCase(method) + "Params"` and `PascalCase(method) + "Result"`.
+- If `--preserve-case` is used, the names are:
+  `method + "_Params"` and `method + "_Result"` (case preserved).
 - **Automatic snake_case conversion**: When input uses snake_case naming and `--use-snake-case` is omitted:
   - Method names: `get_user_by_id` → `getUserById`
   - Type names: `user`, `get_users_result` → `User`, `GetUsersResult`

@@ -8,7 +8,7 @@
     "generate-users-api": "node scripts/generate.mjs --input ./openrpc-users-api.json --out ./src/rpc/generated-users-api",
     "generate-users-api-snake-case": "node scripts/generate.mjs --input ./openrpc-users-api-snake-case.json --out ./src/rpc/generated-users-api-snake-case --use-snake-case",
     "generate-users-api-snake-case-converted": "node scripts/generate.mjs --input ./openrpc-users-api-snake-case.json --out ./src/rpc/generated-users-api-snake-case-converted",
-    "generate-med-isfu-demo-api": "node scripts/generate.mjs --input ./openrpc-med-isfu-demo.json --out ./src/rpc/generated-med-isfu-demo --use-snake-case"
+    "generate-med-isfu-demo-api": "node scripts/generate.mjs --input ./openrpc-med-isfu-demo.json --out ./src/rpc/generated-med-isfu-demo --preserve-case"
   },
   "keywords": [],
   "author": "",
