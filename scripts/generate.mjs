@@ -33,8 +33,8 @@ const configPath = resolve(
 );
 const USE_SNAKE =
   !!args["use-snake-case"] && String(args["use-snake-case"]).toLowerCase() !== "false";
-const PRESERVE_CASE =
-  !!args["preserve-case"] && String(args["preserve-case"]).toLowerCase() !== "false";
+const PRESERVE_MIXED_CASE =
+  !!args["preserve-mixed-case"] && String(args["preserve-mixed-case"]).toLowerCase() !== "false";
 const DEFAULT_OPTIONS_CONFIG = {
   queryOnlyPrefixes: ["get", "list"],
   mutationOnlyPrefixes: ["create", "update", "delete"],
@@ -191,18 +191,27 @@ const escProp = (n) => (isIdent(n) ? n : JSON.stringify(n));
 /* schema refs and type name builders */
 const refName = (ref) => String(ref ?? "").replace(/^#\/components\/schemas\//, "");
 const P = (m) =>
-  PRESERVE_CASE ? `${preserveIdent(m)}_Params` : USE_SNAKE ? `${snakeIdent(m)}_params` : `${pascal(m)}Params`;
+  PRESERVE_MIXED_CASE
+    ? `${preserveIdent(m)}_Params`
+    : USE_SNAKE
+      ? `${snakeIdent(m)}_params`
+      : `${pascal(m)}Params`;
 const R = (m) =>
-  PRESERVE_CASE ? `${preserveIdent(m)}_Result` : USE_SNAKE ? `${snakeIdent(m)}_result` : `${pascal(m)}Result`;
-const FN = (m) => (PRESERVE_CASE ? preserveIdent(m) : USE_SNAKE ? safeSnakeFnIdent(m) : safeFnIdent(m));
+  PRESERVE_MIXED_CASE
+    ? `${preserveIdent(m)}_Result`
+    : USE_SNAKE
+      ? `${snakeIdent(m)}_result`
+      : `${pascal(m)}Result`;
+const FN = (m) =>
+  PRESERVE_MIXED_CASE ? preserveIdent(m) : USE_SNAKE ? safeSnakeFnIdent(m) : safeFnIdent(m);
 const QFN = (m) =>
-  PRESERVE_CASE
+  PRESERVE_MIXED_CASE
     ? `${preserveIdent(m)}_QueryOptions`
     : USE_SNAKE
       ? `${snakeIdent(m)}_query_options`
       : `${safeFnIdent(m)}QueryOptions`;
 const MFN = (m) =>
-  PRESERVE_CASE
+  PRESERVE_MIXED_CASE
     ? `${preserveIdent(m)}_MutationOptions`
     : USE_SNAKE
       ? `${snakeIdent(m)}_mutation_options`
@@ -319,7 +328,7 @@ async function main() {
   if (!Array.isArray(spec?.methods)) throw new Error("Invalid OpenRPC: missing .methods[]");
 
   const schemas = spec?.components?.schemas ?? {};
-  const convertSnakeToCamel = !USE_SNAKE && !PRESERVE_CASE;
+  const convertSnakeToCamel = !USE_SNAKE && !PRESERVE_MIXED_CASE;
   const optionsConfig = await loadOptionsConfig();
   await mkdir(outDir, { recursive: true });
 

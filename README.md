@@ -9,7 +9,6 @@ Validated against the uploaded “User Management API” spec (`getUsers`, `getU
 
 - [Folder layout](#folder-layout)
 - [Scaffolding: `/src/rpc/base` (handwritten, stable)](#scaffolding-srcrpcbase-handwritten-stable)
-
   - [`errors.ts`](#errorsts)
   - [`client.ts`](#clientts)
   - [`react-query.ts`](#react-queryts)
@@ -20,7 +19,6 @@ Validated against the uploaded “User Management API” spec (`getUsers`, `getU
 - [Initialize in a React project](#initialize-in-a-react-project)
 - [Generate API code](#generate-api-code)
 - [Use in application code](#use-in-application-code)
-
   - [Query example](#query-example)
   - [Mutation example](#mutation-example)
   - [Per‑call Axios override](#per-call-axios-override)
@@ -535,10 +533,10 @@ node scripts/generate.mjs --input ./openrpc_snake.json --out ./src/rpc/generated
 ### Mode 4: Preserve mixed casing as-is
 
 When your OpenRPC spec uses mixed conventions (e.g., `InvoiceItem_Create`),
-use `--preserve-case` to keep method names, param names, and result attribute names intact:
+use `--preserve-mixed-case` to keep method names, param names, and result attribute names intact:
 
 ```bash
-node scripts/generate.mjs --input ./openrpc_mixed.json --out ./src/rpc/generated --preserve-case
+node scripts/generate.mjs --input ./openrpc_mixed.json --out ./src/rpc/generated --preserve-mixed-case
 # Example method "InvoiceItem_Create" ->
 #   api.InvoiceItem_Create
 #   InvoiceItem_Create_Params, InvoiceItem_Create_Result
@@ -673,7 +671,7 @@ await api.getUsers({}, { timeout: 4000 });
 
 - One **Params** and one **Result** per method, named strictly by method:
   `PascalCase(method) + "Params"` and `PascalCase(method) + "Result"`.
-- If `--preserve-case` is used, the names are:
+- If `--preserve-mixed-case` is used, the names are:
   `method + "_Params"` and `method + "_Result"` (case preserved).
 - **Automatic snake_case conversion**: When input uses snake_case naming and `--use-snake-case` is omitted:
   - Method names: `get_user_by_id` → `getUserById`
