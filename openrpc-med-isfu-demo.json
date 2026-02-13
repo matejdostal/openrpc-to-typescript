@@ -646,7 +646,18 @@
           "CreationDate": { "type": "string", "format": "date-time" },
           "LastModification": { "type": "string", "format": "date-time" },
           "DeletationDate": { "type": ["string", "null"], "format": "date-time" }
-        }
+        },
+        "required": [
+          "Id",
+          "ReferenceId",
+          "MdsReferenceId",
+          "ValidFrom",
+          "ValidTo",
+          "Name",
+          "MedMeteringPointIdentifiers",
+          "CreationDate",
+          "LastModification"
+        ]
       },
       "Oom_QueryResult": {
         "type": "object",

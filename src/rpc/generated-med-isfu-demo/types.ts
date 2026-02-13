@@ -123,18 +123,18 @@ export interface Oom_Update_Result {
 }
 
 export interface OomRevision {
-  Id?: string;
-  ReferenceId?: string;
-  MdsReferenceId?: string | null;
+  Id: string;
+  ReferenceId: string;
+  MdsReferenceId: string | null;
   OdberatelReferenceId?: string | null;
   DodavatelReferenceId?: string | null;
-  ValidFrom?: string;
-  ValidTo?: string;
-  Name?: string;
-  MedMeteringPointIdentifiers?: string;
+  ValidFrom: string;
+  ValidTo: string;
+  Name: string;
+  MedMeteringPointIdentifiers: string;
   RevisionReasonTags?: string;
-  CreationDate?: string;
-  LastModification?: string;
+  CreationDate: string;
+  LastModification: string;
   DeletationDate?: string | null;
 }
 
